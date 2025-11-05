@@ -239,41 +239,169 @@ function displayFallbackContent() {
 }
 
 // ===========================
-// Scroll Animations
+// Enhanced Scroll Animations
 // ===========================
 
-// Animate elements on scroll
-const animateOnScroll = () => {
-    const elements = document.querySelectorAll('.project-card, .blog-card, .tag');
-
-    elements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementBottom = element.getBoundingClientRect().bottom;
-        const windowHeight = window.innerHeight;
-
-        if (elementTop < windowHeight - 100 && elementBottom > 0) {
-            element.style.opacity = '1';
-            element.style.transform = 'translateY(0)';
+// Scroll Reveal Observer
+const scrollRevealObserver = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.classList.add('revealed');
+            }, index * 50); // Stagger effect
         }
     });
-};
+}, {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+});
 
-window.addEventListener('scroll', animateOnScroll);
-
-// ===========================
-// Project Cards Interaction
-// ===========================
-
-const projectCards = document.querySelectorAll('.project-card');
-
-projectCards.forEach(card => {
-    card.addEventListener('mouseenter', function() {
-        this.style.transition = 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)';
+// Observe all cards and elements
+document.addEventListener('DOMContentLoaded', () => {
+    // Observe project cards
+    document.querySelectorAll('.project-card').forEach((card, index) => {
+        card.classList.add('scroll-reveal-scale');
+        scrollRevealObserver.observe(card);
     });
 
-    card.addEventListener('mouseleave', function() {
-        this.style.transition = 'all 0.3s ease';
+    // Observe award cards
+    document.querySelectorAll('.award-card').forEach((card, index) => {
+        const direction = index % 2 === 0 ? 'scroll-reveal-left' : 'scroll-reveal-right';
+        card.classList.add(direction);
+        scrollRevealObserver.observe(card);
     });
+
+    // Observe blog cards
+    document.querySelectorAll('.blog-card').forEach(card => {
+        card.classList.add('scroll-reveal');
+        scrollRevealObserver.observe(card);
+    });
+
+    // Observe expertise tags
+    document.querySelectorAll('.tag').forEach((tag, index) => {
+        tag.classList.add('scroll-reveal');
+        tag.style.transitionDelay = `${index * 0.05}s`;
+        scrollRevealObserver.observe(tag);
+    });
+
+    // Observe section titles
+    document.querySelectorAll('.section-title').forEach(title => {
+        title.classList.add('scroll-reveal');
+        scrollRevealObserver.observe(title);
+    });
+});
+
+// ===========================
+// Advanced Parallax Depth System
+// ===========================
+
+let parallaxTicking = false;
+
+function updateAdvancedParallax() {
+    const scrolled = window.pageYOffset;
+    const sections = document.querySelectorAll('.section');
+
+    sections.forEach(section => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionScroll = scrolled - sectionTop;
+
+        // Only apply parallax when section is in view
+        if (sectionScroll > -window.innerHeight && sectionScroll < sectionHeight + window.innerHeight) {
+            // Background layer (slowest)
+            const bgLayers = section.querySelectorAll('.parallax-bg');
+            bgLayers.forEach(layer => {
+                const speed = 0.15;
+                layer.style.transform = `translateY(${sectionScroll * speed}px)`;
+            });
+
+            // Mid layer (medium speed)
+            const midLayers = section.querySelectorAll('.parallax-mid');
+            midLayers.forEach(layer => {
+                const speed = 0.35;
+                layer.style.transform = `translateY(${sectionScroll * speed}px)`;
+            });
+
+            // Front layer (fast)
+            const frontLayers = section.querySelectorAll('.parallax-front');
+            frontLayers.forEach(layer => {
+                const speed = 0.5;
+                const translateY = sectionScroll * speed * 0.1;
+                layer.style.transform = `translateY(${-translateY}px)`;
+            });
+
+            // Floating shapes with different speeds
+            const shapes = section.querySelectorAll('.floating-shape');
+            shapes.forEach((shape, index) => {
+                const speed = 0.2 + (index * 0.15);
+                const rotation = sectionScroll * 0.02;
+                shape.style.transform += ` translateY(${sectionScroll * speed}px) rotate(${rotation}deg)`;
+            });
+
+            // Cards with subtle parallax
+            const cards = section.querySelectorAll('.project-card, .award-card, .blog-card');
+            cards.forEach((card, index) => {
+                const cardRect = card.getBoundingClientRect();
+                const cardCenter = cardRect.top + cardRect.height / 2;
+                const screenCenter = window.innerHeight / 2;
+                const distance = (cardCenter - screenCenter) / screenCenter;
+                const translateY = distance * 20;
+
+                card.style.transform = `translateY(${translateY}px) translateZ(0)`;
+            });
+        }
+    });
+
+    parallaxTicking = false;
+}
+
+function requestAdvancedParallax() {
+    if (!parallaxTicking) {
+        window.requestAnimationFrame(updateAdvancedParallax);
+        parallaxTicking = true;
+    }
+}
+
+window.addEventListener('scroll', requestAdvancedParallax);
+
+// Initial call
+updateAdvancedParallax();
+
+// ===========================
+// 3D Card Tilt Effects
+// ===========================
+
+function add3DTiltEffect() {
+    const cards = document.querySelectorAll('.project-card, .award-card, .blog-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -10;
+            const rotateY = ((x - centerX) / centerX) * 10;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        });
+
+        card.style.transition = 'transform 0.3s ease';
+    });
+}
+
+// Initialize 3D tilt effects after DOM loads
+document.addEventListener('DOMContentLoaded', () => {
+    setTimeout(() => {
+        add3DTiltEffect();
+    }, 500);
 });
 
 // ===========================
@@ -311,6 +439,37 @@ window.addEventListener('scroll', () => {
     if (particles && scrolled < window.innerHeight) {
         particles.style.transform = `translateY(${scrolled * 0.3}px)`;
     }
+});
+
+// ===========================
+// Scroll Navigation Dots
+// ===========================
+
+const scrollDots = document.querySelectorAll('.scroll-dot');
+const sections = document.querySelectorAll('.section, .hero');
+
+// Update active dot on scroll with Intersection Observer
+const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const sectionId = entry.target.getAttribute('id');
+
+            scrollDots.forEach(dot => {
+                dot.classList.remove('active');
+                if (dot.getAttribute('data-section') === sectionId) {
+                    dot.classList.add('active');
+                }
+            });
+        }
+    });
+}, {
+    threshold: 0.5, // Section is considered active when 50% visible
+    rootMargin: '0px'
+});
+
+// Observe all sections
+sections.forEach(section => {
+    navObserver.observe(section);
 });
 
 // ===========================

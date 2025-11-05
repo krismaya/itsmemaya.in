@@ -45,6 +45,8 @@
 
 html {
     scroll-behavior: smooth;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 body {
@@ -53,17 +55,87 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     transition: background-color 0.3s ease, color 0.3s ease;
+    overflow-x: hidden;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 2rem;
+    position: relative;
+    z-index: 10;
 }
 
 .section {
+    min-height: 100vh;
     padding: 6rem 0;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Parallax Layers */
+.parallax-layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    will-change: transform;
+}
+
+/* Floating Shapes for Parallax */
+.floating-shape {
+    position: absolute;
+    border-radius: 50%;
+    opacity: 0.6;
+    pointer-events: none;
+    will-change: transform;
+}
+
+.shape-1 {
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(99, 102, 241, 0.4), transparent);
+    top: 10%;
+    left: 10%;
+    animation: floatShape1 20s ease-in-out infinite;
+}
+
+.shape-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.35), transparent);
+    bottom: 15%;
+    right: 15%;
+    animation: floatShape2 18s ease-in-out infinite;
+}
+
+.shape-3 {
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(236, 72, 153, 0.3), transparent);
+    top: 50%;
+    left: 50%;
+    animation: floatShape3 22s ease-in-out infinite;
+}
+
+@keyframes floatShape1 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(50px, -60px) scale(1.1); }
+    66% { transform: translate(-40px, 40px) scale(0.95); }
+}
+
+@keyframes floatShape2 {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-60px, 50px) scale(1.15); }
+    66% { transform: translate(50px, -50px) scale(0.9); }
+}
+
+@keyframes floatShape3 {
+    0%, 100% { transform: translate(-50%, -50%) scale(1); }
+    50% { transform: translate(-50%, -50%) translate(40px, -40px) scale(1.2); }
 }
 
 .section-title {
@@ -112,6 +184,60 @@ body {
 .theme-toggle:hover {
     transform: scale(1.1) rotate(20deg);
     box-shadow: var(--card-shadow-hover);
+}
+
+/* ===========================
+   Scroll Navigation Dots
+   =========================== */
+
+.scroll-nav {
+    display: none;
+}
+
+.scroll-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--text-secondary);
+    opacity: 0.4;
+    transition: all 0.3s ease;
+    position: relative;
+    cursor: pointer;
+}
+
+.scroll-dot::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 24px;
+    height: 24px;
+    border: 2px solid var(--accent-primary);
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.scroll-dot:hover,
+.scroll-dot.active {
+    background: var(--accent-primary);
+    opacity: 1;
+    transform: scale(1.3);
+}
+
+.scroll-dot.active::before {
+    transform: translate(-50%, -50%) scale(1);
+}
+
+@media (max-width: 768px) {
+    .scroll-nav {
+        right: 1rem;
+    }
+
+    .scroll-dot {
+        width: 10px;
+        height: 10px;
+    }
 }
 
 /* ===========================
@@ -307,11 +433,31 @@ body {
 
 .about {
     background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+.about .floating-shape {
+    filter: blur(50px);
+}
+
+@keyframes bgFloat {
+    0%, 100% {
+        transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    33% {
+        transform: translate(30px, -40px) scale(1.1) rotate(2deg);
+    }
+    66% {
+        transform: translate(-30px, 30px) scale(1.05) rotate(-2deg);
+    }
 }
 
 .about-content {
     max-width: 800px;
     margin: 0 auto;
+    position: relative;
+    z-index: 1;
 }
 
 .about-text {
@@ -364,11 +510,34 @@ body {
    Projects Section
    =========================== */
 
+.projects {
+    position: relative;
+    overflow: hidden;
+    background: var(--bg-primary);
+}
+
+.projects .floating-shape {
+    filter: blur(40px);
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1) translateY(0);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.3) translateY(-30px);
+        opacity: 1;
+    }
+}
+
 .projects-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 2rem;
     margin-top: 3rem;
+    position: relative;
+    z-index: 1;
 }
 
 .project-card {
@@ -387,6 +556,10 @@ body {
 .project-card:nth-child(2) { animation-delay: 0.2s; }
 .project-card:nth-child(3) { animation-delay: 0.3s; }
 .project-card:nth-child(4) { animation-delay: 0.4s; }
+.project-card:nth-child(5) { animation-delay: 0.5s; }
+.project-card:nth-child(6) { animation-delay: 0.6s; }
+.project-card:nth-child(7) { animation-delay: 0.7s; }
+.project-card:nth-child(8) { animation-delay: 0.8s; }
 
 .project-card::before {
     content: '';
@@ -457,11 +630,149 @@ body {
 }
 
 /* ===========================
+   Awards Section
+   =========================== */
+
+.awards {
+    background: var(--bg-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.awards .floating-shape {
+    filter: blur(45px);
+}
+
+.awards::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background:
+        repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(139, 92, 246, 0.05) 40px, rgba(139, 92, 246, 0.05) 80px);
+    pointer-events: none;
+    z-index: 1;
+}
+
+.awards-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+    position: relative;
+    z-index: 1;
+}
+
+.award-card {
+    background: var(--card-bg);
+    border: 2px solid var(--border-color);
+    border-radius: 16px;
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.8s ease;
+    animation-fill-mode: both;
+}
+
+.award-card:nth-child(1) { animation-delay: 0.1s; }
+.award-card:nth-child(2) { animation-delay: 0.2s; }
+.award-card:nth-child(3) { animation-delay: 0.3s; }
+
+.award-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 80px;
+    height: 80px;
+    background: var(--accent-gradient);
+    opacity: 0.1;
+    border-radius: 50%;
+    transform: translate(30%, -30%);
+    transition: all 0.3s ease;
+}
+
+.award-card:hover::before {
+    transform: translate(20%, -20%) scale(1.2);
+    opacity: 0.15;
+}
+
+.award-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--card-shadow-hover);
+    border-color: var(--accent-primary);
+}
+
+.award-year {
+    display: inline-block;
+    padding: 0.4rem 1rem;
+    background: var(--accent-gradient);
+    color: white;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+}
+
+.award-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+}
+
+.award-org {
+    color: var(--accent-primary);
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.award-description {
+    color: var(--text-secondary);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.award-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+.award-link:hover {
+    gap: 0.75rem;
+    color: var(--accent-secondary);
+}
+
+.award-link i {
+    transition: transform 0.3s ease;
+}
+
+.award-link:hover i {
+    transform: translateX(3px);
+}
+
+/* ===========================
    Content/Blog Section
    =========================== */
 
 .content {
     background: var(--bg-secondary);
+    position: relative;
+    overflow: hidden;
+}
+
+.content .floating-shape {
+    filter: blur(50px);
 }
 
 .content-tabs {
@@ -707,6 +1018,93 @@ body {
     }
 }
 
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInRight {
+    from {
+        opacity: 0;
+        transform: translateX(100px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes rotateIn {
+    from {
+        opacity: 0;
+        transform: rotate(-10deg) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: rotate(0) scale(1);
+    }
+}
+
+/* Scroll Reveal Classes */
+.scroll-reveal {
+    opacity: 0;
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal.revealed {
+    opacity: 1;
+}
+
+.scroll-reveal-left {
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal-left.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scroll-reveal-right {
+    opacity: 0;
+    transform: translateX(50px);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal-right.revealed {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.scroll-reveal-scale {
+    opacity: 0;
+    transform: scale(0.9);
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scroll-reveal-scale.revealed {
+    opacity: 1;
+    transform: scale(1);
+}
+
 /* ===========================
    Responsive Design
    =========================== */
@@ -750,6 +1148,11 @@ body {
     }
 
     .projects-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .awards-grid {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
