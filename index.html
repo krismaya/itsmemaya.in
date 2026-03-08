@@ -3,340 +3,485 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Mayakrishnan R - Technical Manager (RevOps) specializing in AI-driven GTM processes, revenue automation, and data pipeline engineering at Kissflow">
-    <title>Mayakrishnan - RevOps Tech Leader</title>
+    <meta name="description" content="Mayakrishnan R - Technical Manager (RevOps) specializing in AI-driven GTM processes, revenue automation, and data pipeline engineering">
+    <title>Mayakrishnan | RevOps Tech Leader</title>
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Theme Toggle -->
-    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
-        <i class="fas fa-moon"></i>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="loader">
+            <div class="loader-text">
+                <span data-text="INITIALIZING">INITIALIZING</span>
+            </div>
+            <div class="loader-bar">
+                <div class="loader-progress"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scanlines Overlay -->
+    <div class="scanlines"></div>
+
+    <!-- Cursor Glow -->
+    <div class="cursor-glow" id="cursorGlow"></div>
+
+    <!-- Grid Background -->
+    <div class="grid-bg"></div>
+
+    <!-- Floating Particles -->
+    <div class="particles" id="particles"></div>
+
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">MAYA</span>
+                <span class="logo-bracket">]</span>
+            </a>
+            <div class="nav-links" id="navLinks">
+                <a href="#about" class="nav-link" data-text="ABOUT">ABOUT</a>
+                <a href="#projects" class="nav-link" data-text="PROJECTS">PROJECTS</a>
+                <a href="#awards" class="nav-link" data-text="AWARDS">AWARDS</a>
+                <a href="#blog" class="nav-link" data-text="BLOG">BLOG</a>
+            </div>
+            <div class="nav-actions">
+                <a href="https://www.linkedin.com/in/mayakrishnan-r/" target="_blank" class="nav-social">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://github.com/krismaya" target="_blank" class="nav-social">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Button -->
+    <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
     </button>
 
     <!-- Hero Section -->
     <section id="hero" class="hero">
-        <div class="particles" id="particles"></div>
         <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">
-                    <span class="wave">👋</span>
-                    Hi, I'm <span class="highlight">Mayakrishnan</span>
-                </h1>
-                <p class="hero-subtitle">Technical Manager (RevOps) | AI Automation Specialist | Data Engineer</p>
-                <p class="hero-description">
-                    Transforming revenue operations through AI-driven automation, seamless integrations, and intelligent data pipelines.
-                    Building systems that eliminate manual effort and accelerate GTM processes.
-                </p>
-                <div class="social-links">
-                    <a href="https://www.linkedin.com/in/mayakrishnan-r/" target="_blank" rel="noopener" class="social-link">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="https://medium.com/@krismaya1" target="_blank" rel="noopener" class="social-link">
-                        <i class="fab fa-medium"></i>
-                    </a>
-                    <a href="https://github.com/krismaya" target="_blank" rel="noopener" class="social-link">
-                        <i class="fab fa-github"></i>
-                    </a>
+            <div class="hero-glitch-container">
+                <div class="hero-subtitle">
+                    <span class="typing-text" id="typingText"></span>
+                    <span class="cursor">_</span>
+                </div>
+                <h1 class="hero-title glitch" data-text="MAYAKRISHNAN">MAYAKRISHNAN</h1>
+            </div>
+
+            <div class="hero-role">
+                <span class="role-line"></span>
+                <span class="role-text">TECHNICAL MANAGER (REVOPS)</span>
+                <span class="role-line"></span>
+            </div>
+
+            <p class="hero-desc">
+                Building <span class="highlight">AI-powered</span> revenue operations systems.
+                Transforming manual GTM processes into <span class="highlight">intelligent automation</span>.
+            </p>
+
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-value" data-value="9">0</span>
+                    <span class="stat-label">YEARS EXP</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value" data-value="50">0</span>
+                    <span class="stat-label">PROJECTS</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-item">
+                    <span class="stat-value" data-value="100">0</span>
+                    <span class="stat-label">AUTOMATIONS</span>
                 </div>
             </div>
+
+            <div class="hero-cta">
+                <a href="#projects" class="btn btn-primary">
+                    <span class="btn-text">VIEW PROJECTS</span>
+                    <span class="btn-icon"><i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="#about" class="btn btn-secondary">
+                    <span class="btn-text">LEARN MORE</span>
+                </a>
+            </div>
         </div>
+
         <div class="scroll-indicator">
-            <span></span>
+            <span class="scroll-text">SCROLL</span>
+            <div class="scroll-line">
+                <div class="scroll-dot"></div>
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="about section">
-        <div class="floating-shape shape-1 parallax-layer parallax-bg"></div>
-        <div class="floating-shape shape-2 parallax-layer parallax-mid"></div>
-        <div class="container parallax-front">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p class="lead">
-                        9+ years of experience building revenue operations systems at Kissflow, transforming manual processes into AI-powered automation.
+    <section id="about" class="section">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <span class="section-number">01</span>
+                <h2 class="section-title glitch-hover" data-text="ABOUT_ME">ABOUT_ME</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="about-grid">
+                <div class="about-text reveal-left">
+                    <p class="about-lead">
+                        > <span class="highlight">9+ years</span> of experience building revenue operations systems at Kissflow,
+                        transforming manual processes into AI-powered automation.
                     </p>
                     <p>
-                        My journey started as a Software Engineer, evolved through Marketing Tech and RevOps Systems leadership,
-                        and now as Technical Manager (RevOps), I lead the integration of AI into GTM processes. I've built systems
-                        that streamline lead generation, automate CRM workflows, predict customer churn, and create unified data
-                        pipelines across sales, marketing, and finance.
+                        My journey started as a Software Engineer, evolved through Marketing Tech and RevOps Systems leadership.
+                        I've built systems that streamline lead generation, automate CRM workflows, predict customer churn,
+                        and create unified data pipelines across sales, marketing, and finance.
                     </p>
                     <p>
                         From developing the Customer Success Platform (Unify) to creating engagement scoring systems and
                         implementing AI-driven competitor intelligence, I specialize in reducing manual effort and accelerating
-                        revenue generation through intelligent automation. I believe that the future of RevOps lies in seamless
-                        integrations, real-time insights, and AI that augments human decision-making.
+                        revenue generation through intelligent automation.
                     </p>
                 </div>
-                <div class="expertise-tags">
-                    <span class="tag">Revenue Operations</span>
-                    <span class="tag">AI Automation</span>
-                    <span class="tag">CRM Management</span>
-                    <span class="tag">Data Pipeline Engineering</span>
-                    <span class="tag">Marketing Automation</span>
-                    <span class="tag">Workflow Automation</span>
-                    <span class="tag">Python & Django</span>
-                    <span class="tag">ETL & API Integration</span>
-                    <span class="tag">Zapier</span>
-                    <span class="tag">Google Cloud Platform</span>
-                    <span class="tag">Lead Scoring</span>
-                    <span class="tag">Revenue Analytics</span>
-                    <span class="tag">Data Governance</span>
-                    <span class="tag">GenAI Applications</span>
+
+                <div class="skills-container reveal-right">
+                    <h3 class="skills-title">> TECH_STACK</h3>
+                    <div class="skills-grid">
+                        <div class="skill-item" data-skill="AI Agents">
+                            <div class="skill-icon"><i class="fas fa-server"></i></div>
+                            <span class="skill-name">AI Agents</span>
+                        </div>
+                        <div class="skill-item" data-skill="GenAI">
+                            <div class="skill-icon"><i class="fas fa-microchip"></i></div>
+                            <span class="skill-name">GenAI</span>
+                        </div>
+                        <div class="skill-item" data-skill="RAG">
+                            <div class="skill-icon"><i class="fas fa-layer-group"></i></div>
+                            <span class="skill-name">RAG Systems</span>
+                        </div>
+                        <div class="skill-item" data-skill="HubSpot">
+                            <div class="skill-icon"><i class="fab fa-hubspot"></i></div>
+                            <span class="skill-name">HubSpot</span>
+                        </div>
+                        <div class="skill-item" data-skill="Python">
+                            <div class="skill-icon"><i class="fab fa-python"></i></div>
+                            <span class="skill-name">Python</span>
+                        </div>
+                        <div class="skill-item" data-skill="RevOps">
+                            <div class="skill-icon"><i class="fas fa-chart-line"></i></div>
+                            <span class="skill-name">RevOps</span>
+                        </div>
+                        <div class="skill-item" data-skill="CRM">
+                            <div class="skill-icon"><i class="fas fa-database"></i></div>
+                            <span class="skill-name">CRM</span>
+                        </div>
+                        <div class="skill-item" data-skill="Automation">
+                            <div class="skill-icon"><i class="fas fa-robot"></i></div>
+                            <span class="skill-name">Automation</span>
+                        </div>
+                        <div class="skill-item" data-skill="GCP">
+                            <div class="skill-icon"><i class="fab fa-google"></i></div>
+                            <span class="skill-name">GCP</span>
+                        </div>
+                        <div class="skill-item" data-skill="APIs">
+                            <div class="skill-icon"><i class="fas fa-plug"></i></div>
+                            <span class="skill-name">APIs</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Projects Section -->
-    <section id="projects" class="projects section">
-        <div class="floating-shape shape-2 parallax-layer parallax-bg"></div>
-        <div class="floating-shape shape-3 parallax-layer parallax-mid"></div>
-        <div class="container parallax-front">
-            <h2 class="section-title">Featured Projects</h2>
+    <section id="projects" class="section">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <span class="section-number">02</span>
+                <h2 class="section-title glitch-hover" data-text="PROJECTS">PROJECTS</h2>
+                <div class="section-line"></div>
+            </div>
+
             <div class="projects-grid">
-                <!-- Project Card 1 -->
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-layer-group"></i>
+                <!-- Project 1 -->
+                <article class="project-card reveal-up" data-delay="0">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-layer-group"></i>
+                            </div>
+                            <span class="project-status status-live">LIVE</span>
+                        </div>
+                        <h3 class="project-title">Unified GTM Interface</h3>
+                        <p class="project-desc">
+                            Centralized knowledge hub with LLM-powered chat interface for instant insights.
+                            Extracts intelligence from meeting transcriptions and recordings.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">LLM</span>
+                            <span class="tag">Document AI</span>
+                            <span class="tag">Python</span>
+                        </div>
+                        <div class="project-glow"></div>
                     </div>
-                    <h3 class="project-title">Unified GTM Interface</h3>
-                    <p class="project-description">
-                        Centralized knowledge hub storing documents, collateral, videos, and enablement materials with
-                        LLM-powered chat interface for instant insights. Extracts intelligence from meeting transcriptions
-                        and recordings to inform GTM strategy.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">LLM</span>
-                        <span class="tech-badge">Document AI</span>
-                        <span class="tech-badge">Chat Interface</span>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Project Card 2 -->
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-search-dollar"></i>
+                <!-- Project 2 -->
+                <article class="project-card reveal-up" data-delay="100">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-search-dollar"></i>
+                            </div>
+                            <span class="project-status status-live">LIVE</span>
+                        </div>
+                        <h3 class="project-title">AI Competitor Extractor</h3>
+                        <p class="project-desc">
+                            Automated competitor intelligence system that extracts, analyzes, and tracks
+                            competitive insights from multiple sources.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">AI/ML</span>
+                            <span class="tag">NLP</span>
+                            <span class="tag">Scraping</span>
+                        </div>
+                        <div class="project-glow"></div>
                     </div>
-                    <h3 class="project-title">AI Competitor Extractor</h3>
-                    <p class="project-description">
-                        Automated competitor intelligence system that extracts, analyzes, and tracks competitive
-                        insights from multiple sources to inform GTM strategy and positioning.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">AI/ML</span>
-                        <span class="tech-badge">Web Scraping</span>
-                        <span class="tech-badge">NLP</span>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Project Card 3 -->
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-dna"></i>
+                <!-- Project 3 -->
+                <article class="project-card reveal-up" data-delay="200">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-broadcast-tower"></i>
+                            </div>
+                            <span class="project-status status-live">LIVE</span>
+                        </div>
+                        <h3 class="project-title">Signals Platform</h3>
+                        <p class="project-desc">
+                            Real-time buyer intent and engagement signal tracking system that captures
+                            website activity and product usage.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Real-time</span>
+                            <span class="tag">Analytics</span>
+                            <span class="tag">Intent</span>
+                        </div>
+                        <div class="project-glow"></div>
                     </div>
-                    <h3 class="project-title">Clay Use Cases Integration</h3>
-                    <p class="project-description">
-                        Advanced data enrichment workflows leveraging Clay for automated lead qualification,
-                        company intelligence gathering, and personalized outreach at scale.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">Clay</span>
-                        <span class="tech-badge">Enrichment</span>
-                        <span class="tech-badge">Automation</span>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Project Card 4 -->
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-broadcast-tower"></i>
+                <!-- Project 4 -->
+                <article class="project-card reveal-up" data-delay="300">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-chart-line"></i>
+                            </div>
+                            <span class="project-status status-live">LIVE</span>
+                        </div>
+                        <h3 class="project-title">Product Usage Analytics</h3>
+                        <p class="project-desc">
+                            Customer Success Platform (Unify) tracking usage, analyzing behavior patterns,
+                            and predicting churn probability using ML models.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">ML</span>
+                            <span class="tag">Churn</span>
+                            <span class="tag">Python</span>
+                        </div>
+                        <div class="project-glow"></div>
                     </div>
-                    <h3 class="project-title">Signals Platform</h3>
-                    <p class="project-description">
-                        Real-time buyer intent and engagement signal tracking system that captures website activity,
-                        content engagement, and product usage to identify high-value opportunities.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">Real-time</span>
-                        <span class="tech-badge">Intent Data</span>
-                        <span class="tech-badge">Analytics</span>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Project Card 5 -->
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-chart-line"></i>
+                <!-- Project 5 -->
+                <article class="project-card reveal-up" data-delay="400">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-robot"></i>
+                            </div>
+                            <span class="project-status status-live">LIVE</span>
+                        </div>
+                        <h3 class="project-title">CRM Data Hygiene Bot</h3>
+                        <p class="project-desc">
+                            Automated data governance system maintaining CRM data quality through
+                            validation rules and duplicate detection.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">Automation</span>
+                            <span class="tag">CRM</span>
+                            <span class="tag">Quality</span>
+                        </div>
+                        <div class="project-glow"></div>
                     </div>
-                    <h3 class="project-title">Product Usage Analytics</h3>
-                    <p class="project-description">
-                        Customer Success Platform (Unify) tracking platform usage for every account, analyzing customer
-                        behavior patterns, purchase trends over time, and predicting churn probability using ML models
-                        to enable proactive customer success interventions.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">ML</span>
-                        <span class="tech-badge">Churn Prediction</span>
-                        <span class="tech-badge">Python</span>
-                    </div>
-                </div>
+                </article>
 
-                <!-- Project Card 6 -->
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-robot"></i>
+                <!-- Project 6 -->
+                <article class="project-card reveal-up" data-delay="500">
+                    <div class="project-card-inner">
+                        <div class="project-header">
+                            <div class="project-icon">
+                                <i class="fas fa-microphone-alt"></i>
+                            </div>
+                            <span class="project-status status-ongoing">DEV</span>
+                        </div>
+                        <h3 class="project-title">Meeting-to-CRM Bot</h3>
+                        <p class="project-desc">
+                            AI-powered system extracting insights from meeting recordings and
+                            automatically populating CRM fields.
+                        </p>
+                        <div class="project-tags">
+                            <span class="tag">GenAI</span>
+                            <span class="tag">STT</span>
+                            <span class="tag">CRM</span>
+                        </div>
+                        <div class="project-glow"></div>
                     </div>
-                    <h3 class="project-title">CRM Data Hygiene Bot</h3>
-                    <p class="project-description">
-                        Automated data governance system maintaining CRM data quality through validation rules,
-                        duplicate detection, field completion, and standardization, ensuring sales teams work with
-                        accurate and up-to-date customer information.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">Automation</span>
-                        <span class="tech-badge">Data Quality</span>
-                        <span class="tech-badge">CRM</span>
-                    </div>
-                </div>
-
-                <!-- Project Card 7 -->
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-microphone-alt"></i>
-                    </div>
-                    <h3 class="project-title">Meeting-to-CRM Auto-Populator</h3>
-                    <p class="project-description">
-                        AI-powered system extracting insights from meeting recordings (Gong, Chorus) and automatically
-                        populating CRM fields with next steps, pain points, and key discussion topics.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">GenAI</span>
-                        <span class="tech-badge">Speech-to-Text</span>
-                        <span class="tech-badge">Automation</span>
-                    </div>
-                </div>
-
-                <!-- Project Card 8 -->
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3 class="project-title">Lead Intelligence System</h3>
-                    <p class="project-description">
-                        End-to-end lead generation platform with engagement scoring, multi-touch attribution,
-                        automated lead routing, and predictive lead scoring using historical conversion data.
-                    </p>
-                    <div class="project-tech">
-                        <span class="tech-badge">Lead Scoring</span>
-                        <span class="tech-badge">Zapier</span>
-                        <span class="tech-badge">Workflows</span>
-                    </div>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Awards/Recognition Section -->
-    <section id="awards" class="awards section">
-        <div class="floating-shape shape-1 parallax-layer parallax-bg"></div>
-        <div class="floating-shape shape-3 parallax-layer parallax-mid"></div>
-        <div class="container parallax-front">
-            <h2 class="section-title">Recognition & Awards</h2>
-            <div class="awards-grid">
-                <div class="award-card">
+    <!-- Awards Section -->
+    <section id="awards" class="section">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <span class="section-number">03</span>
+                <h2 class="section-title glitch-hover" data-text="AWARDS">AWARDS</h2>
+                <div class="section-line"></div>
+            </div>
+
+            <div class="awards-timeline">
+                <div class="timeline-line"></div>
+
+                <article class="award-item reveal-left" data-delay="0">
                     <div class="award-year">2024</div>
-                    <h3 class="award-title">Kani Tamil Conference Contributor</h3>
-                    <p class="award-org">Government of Tamil Nadu</p>
-                    <p class="award-description">
-                        Contributed to creating a GenAI-based Thirukural web application, making ancient Tamil
-                        wisdom accessible through modern AI technology.
-                    </p>
-                    <a href="https://thirukural.ai" target="_blank" rel="noopener" class="award-link">
-                        <i class="fas fa-external-link-alt"></i> Thirukural.AI
-                    </a>
-                </div>
+                    <div class="award-content">
+                        <div class="award-dot"></div>
+                        <h3 class="award-title">Kani Tamil Conference Contributor</h3>
+                        <p class="award-org">Government of Tamil Nadu</p>
+                        <p class="award-desc">
+                            Contributed to creating a GenAI-based Thirukural web application,
+                            making ancient Tamil wisdom accessible through modern AI technology.
+                        </p>
+                        <a href="https://thirukural.ai" target="_blank" class="award-link">
+                            <span>thirukural.ai</span>
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </article>
 
-                <div class="award-card">
+                <article class="award-item reveal-right" data-delay="100">
                     <div class="award-year">2018</div>
-                    <h3 class="award-title">IC Award from Customer Success</h3>
-                    <p class="award-org">Kissflow Inc</p>
-                    <p class="award-description">
-                        Recognized for building the Customer Success Platform (Unify) as an individual contributor,
-                        enabling churn prediction through product usage analysis and customer journey tracking.
-                    </p>
-                </div>
+                    <div class="award-content">
+                        <div class="award-dot"></div>
+                        <h3 class="award-title">IC Award - Customer Success</h3>
+                        <p class="award-org">Kissflow Inc</p>
+                        <p class="award-desc">
+                            Recognized for building the Customer Success Platform (Unify),
+                            enabling churn prediction through product usage analysis.
+                        </p>
+                    </div>
+                </article>
 
-                <div class="award-card">
+                <article class="award-item reveal-left" data-delay="200">
                     <div class="award-year">2017</div>
-                    <h3 class="award-title">Man of Automation</h3>
-                    <p class="award-org">Kissflow Inc</p>
-                    <p class="award-description">
-                        Awarded for integrating sales and marketing processes in CRM through custom-built automation
-                        applications, significantly reducing manual effort across teams.
-                    </p>
-                </div>
+                    <div class="award-content">
+                        <div class="award-dot"></div>
+                        <h3 class="award-title">Man of Automation</h3>
+                        <p class="award-org">Kissflow Inc</p>
+                        <p class="award-desc">
+                            Awarded for integrating sales and marketing processes through
+                            custom-built automation applications.
+                        </p>
+                    </div>
+                </article>
             </div>
         </div>
     </section>
 
-    <!-- Blog/Content Section -->
-    <section id="content" class="content section">
-        <div class="floating-shape shape-2 parallax-layer parallax-bg"></div>
-        <div class="floating-shape shape-1 parallax-layer parallax-mid"></div>
-        <div class="container parallax-front">
-            <h2 class="section-title">Recent Writings</h2>
-            <p class="section-subtitle">Thoughts on AI, technology, and innovation</p>
+    <!-- Blog Section -->
+    <section id="blog" class="section">
+        <div class="container">
+            <div class="section-header reveal-up">
+                <span class="section-number">04</span>
+                <h2 class="section-title glitch-hover" data-text="BLOG">BLOG</h2>
+                <div class="section-line"></div>
+            </div>
 
-            <div class="content-tabs">
+            <div class="content-tabs reveal-up">
                 <button class="tab-btn active" data-tab="medium">
-                    <i class="fab fa-medium"></i> Medium
+                    <i class="fab fa-medium"></i>
+                    <span>MEDIUM</span>
                 </button>
                 <button class="tab-btn" data-tab="linkedin">
-                    <i class="fab fa-linkedin"></i> LinkedIn
+                    <i class="fab fa-linkedin"></i>
+                    <span>LINKEDIN</span>
                 </button>
             </div>
 
             <div id="loading" class="loading">
-                <div class="spinner"></div>
-                <p>Loading articles...</p>
+                <div class="loader-ring"></div>
+                <span>LOADING_POSTS...</span>
             </div>
 
-            <div id="medium-content" class="blog-grid active">
-                <!-- Medium posts will be dynamically loaded here -->
-            </div>
+            <div id="medium-content" class="blog-grid active"></div>
 
             <div id="linkedin-content" class="blog-grid">
-                <div class="blog-card">
-                    <div class="blog-header">
-                        <i class="fab fa-linkedin blog-source-icon"></i>
-                        <span class="blog-date">Connect on LinkedIn</span>
+                <article class="blog-card">
+                    <div class="blog-card-inner">
+                        <div class="blog-icon">
+                            <i class="fab fa-linkedin"></i>
+                        </div>
+                        <h3 class="blog-title">Connect on LinkedIn</h3>
+                        <p class="blog-excerpt">
+                            Follow my professional journey, insights, and connect with me
+                            for real-time updates on AI and technology trends.
+                        </p>
+                        <a href="https://www.linkedin.com/in/mayakrishnan-r/" target="_blank" class="blog-link">
+                            <span>VIEW PROFILE</span>
+                            <i class="fas fa-arrow-right"></i>
+                        </a>
                     </div>
-                    <h3 class="blog-title">View my LinkedIn posts and updates</h3>
-                    <p class="blog-excerpt">
-                        Follow my professional journey, insights, and connect with me on LinkedIn for real-time updates
-                        on AI, technology trends, and industry perspectives.
-                    </p>
-                    <a href="https://www.linkedin.com/in/mayakrishnan-r/" target="_blank" rel="noopener" class="blog-link">
-                        Visit LinkedIn Profile <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
+                </article>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="container">
-            <p>&copy; 2025 Mayakrishnan. Built with passion for AI and technology.</p>
-            <div class="footer-links">
-                <a href="https://www.linkedin.com/in/mayakrishnan-r/" target="_blank" rel="noopener">LinkedIn</a>
-                <a href="https://medium.com/@krismaya1" target="_blank" rel="noopener">Medium</a>
-                <a href="https://github.com/krismaya" target="_blank" rel="noopener">GitHub</a>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <span class="logo-bracket">[</span>
+                <span class="logo-text">MAYA</span>
+                <span class="logo-bracket">]</span>
             </div>
+            <div class="footer-links">
+                <a href="https://www.linkedin.com/in/mayakrishnan-r/" target="_blank">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="https://medium.com/@krismaya1" target="_blank">
+                    <i class="fab fa-medium"></i>
+                </a>
+                <a href="https://github.com/krismaya" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+            <p class="footer-text">
+                <span class="terminal-prompt">></span> DESIGNED & BUILT WITH <span class="highlight">AI</span> // <span id="currentYear"></span>
+            </p>
         </div>
     </footer>
 

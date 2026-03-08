@@ -1,103 +1,265 @@
 // ===========================
-// Theme Management
+// PRELOADER
 // ===========================
 
-const themeToggle = document.getElementById('theme-toggle');
-const body = document.body;
-const themeIcon = themeToggle.querySelector('i');
-
-// Check for saved theme preference or default to light mode
-const currentTheme = localStorage.getItem('theme') || 'light';
-document.documentElement.setAttribute('data-theme', currentTheme);
-updateThemeIcon(currentTheme);
-
-themeToggle.addEventListener('click', () => {
-    const theme = document.documentElement.getAttribute('data-theme');
-    const newTheme = theme === 'light' ? 'dark' : 'light';
-
-    document.documentElement.setAttribute('data-theme', newTheme);
-    localStorage.setItem('theme', newTheme);
-    updateThemeIcon(newTheme);
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    setTimeout(() => {
+        preloader.classList.add('hidden');
+        initAnimations();
+    }, 2200);
 });
 
-function updateThemeIcon(theme) {
-    themeIcon.className = theme === 'light' ? 'fas fa-moon' : 'fas fa-sun';
+// ===========================
+// CURSOR GLOW EFFECT
+// ===========================
+
+const cursorGlow = document.getElementById('cursorGlow');
+
+if (cursorGlow && window.matchMedia('(hover: hover)').matches) {
+    document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = e.clientX + 'px';
+        cursorGlow.style.top = e.clientY + 'px';
+    });
+
+    document.addEventListener('mouseenter', () => {
+        cursorGlow.style.opacity = '1';
+    });
+
+    document.addEventListener('mouseleave', () => {
+        cursorGlow.style.opacity = '0';
+    });
 }
 
 // ===========================
-// Particle Animation
+// PARTICLES
 // ===========================
 
 function createParticles() {
-    const particlesContainer = document.getElementById('particles');
+    const container = document.getElementById('particles');
+    if (!container) return;
+
     const particleCount = 30;
 
     for (let i = 0; i < particleCount; i++) {
         const particle = document.createElement('div');
         particle.classList.add('particle');
 
-        const size = Math.random() * 100 + 50;
-        const startX = Math.random() * 100;
-        const startY = Math.random() * 100;
-        const duration = Math.random() * 10 + 10;
-        const delay = Math.random() * 5;
+        const size = Math.random() * 3 + 2;
+        particle.style.width = size + 'px';
+        particle.style.height = size + 'px';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+        particle.style.animationDelay = (Math.random() * 10) + 's';
 
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${startX}%`;
-        particle.style.top = `${startY}%`;
-        particle.style.animationDuration = `${duration}s`;
-        particle.style.animationDelay = `${delay}s`;
+        // Random colors
+        const colors = ['#00f5ff', '#ff00ff', '#b14aed', '#00ff88'];
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
 
-        particlesContainer.appendChild(particle);
+        container.appendChild(particle);
     }
 }
 
 createParticles();
 
 // ===========================
-// Smooth Scroll & Intersection Observer
+// NAVIGATION
 // ===========================
 
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -100px 0px'
-};
+const nav = document.getElementById('nav');
+const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+const navLinks = document.getElementById('navLinks');
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            entry.target.style.transform = 'translateY(0)';
+// Scroll effect for nav
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 100) {
+        nav.classList.add('scrolled');
+    } else {
+        nav.classList.remove('scrolled');
+    }
+});
+
+// Mobile menu toggle
+if (mobileMenuBtn && navLinks) {
+    mobileMenuBtn.addEventListener('click', () => {
+        mobileMenuBtn.classList.toggle('active');
+        navLinks.classList.toggle('active');
+        document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+    });
+
+    // Close menu on link click
+    navLinks.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuBtn.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+    });
+}
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
         }
     });
-}, observerOptions);
-
-// Observe all sections
-document.querySelectorAll('.section').forEach(section => {
-    section.style.opacity = '0';
-    section.style.transform = 'translateY(50px)';
-    section.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
-    observer.observe(section);
 });
 
 // ===========================
-// Content Tabs Management
+// TYPING EFFECT
 // ===========================
 
-const tabButtons = document.querySelectorAll('.tab-btn');
+const typingText = document.getElementById('typingText');
+const phrases = [
+    '> INITIALIZING_SYSTEM...',
+    '> LOADING_PROFILE...',
+    '> WELCOME_TO_MY_WORLD',
+    '> AI_POWERED_REVOPS',
+    '> BUILDING_THE_FUTURE'
+];
+
+let phraseIndex = 0;
+let charIndex = 0;
+let isDeleting = false;
+let typeSpeed = 100;
+
+function typeEffect() {
+    if (!typingText) return;
+
+    const currentPhrase = phrases[phraseIndex];
+
+    if (isDeleting) {
+        typingText.textContent = currentPhrase.substring(0, charIndex - 1);
+        charIndex--;
+        typeSpeed = 50;
+    } else {
+        typingText.textContent = currentPhrase.substring(0, charIndex + 1);
+        charIndex++;
+        typeSpeed = 100;
+    }
+
+    if (!isDeleting && charIndex === currentPhrase.length) {
+        typeSpeed = 2000;
+        isDeleting = true;
+    } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        typeSpeed = 500;
+    }
+
+    setTimeout(typeEffect, typeSpeed);
+}
+
+// ===========================
+// COUNTER ANIMATION
+// ===========================
+
+function animateCounters() {
+    const counters = document.querySelectorAll('.stat-value');
+
+    counters.forEach(counter => {
+        const target = parseInt(counter.getAttribute('data-value'));
+        const duration = 2000;
+        const step = target / (duration / 16);
+        let current = 0;
+
+        const updateCounter = () => {
+            current += step;
+            if (current < target) {
+                counter.textContent = Math.floor(current);
+                requestAnimationFrame(updateCounter);
+            } else {
+                counter.textContent = target;
+            }
+        };
+
+        updateCounter();
+    });
+}
+
+// ===========================
+// SCROLL REVEAL ANIMATIONS
+// ===========================
+
+function initScrollReveal() {
+    const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right');
+
+    const observerOptions = {
+        threshold: 0.15,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const delay = entry.target.getAttribute('data-delay') || 0;
+                setTimeout(() => {
+                    entry.target.classList.add('revealed');
+                }, parseInt(delay));
+            }
+        });
+    }, observerOptions);
+
+    revealElements.forEach(el => observer.observe(el));
+}
+
+// ===========================
+// 3D CARD TILT EFFECT
+// ===========================
+
+function init3DCards() {
+    const cards = document.querySelectorAll('.project-card, .blog-card');
+
+    cards.forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            if (window.matchMedia('(hover: none)').matches) return;
+
+            const inner = card.querySelector('.project-card-inner, .blog-card-inner');
+            if (!inner) return;
+
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+
+            const rotateX = ((y - centerY) / centerY) * -10;
+            const rotateY = ((x - centerX) / centerX) * 10;
+
+            inner.style.transform = `translateY(-10px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            const inner = card.querySelector('.project-card-inner, .blog-card-inner');
+            if (inner) {
+                inner.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+            }
+        });
+    });
+}
+
+// ===========================
+// CONTENT TABS
+// ===========================
+
+const tabBtns = document.querySelectorAll('.tab-btn');
 const mediumContent = document.getElementById('medium-content');
 const linkedinContent = document.getElementById('linkedin-content');
 
-tabButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const tab = button.getAttribute('data-tab');
+tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+        const tab = btn.getAttribute('data-tab');
 
-        // Update active button
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        button.classList.add('active');
+        tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
 
-        // Show appropriate content
         if (tab === 'medium') {
             mediumContent.classList.add('active');
             linkedinContent.classList.remove('active');
@@ -109,28 +271,25 @@ tabButtons.forEach(button => {
 });
 
 // ===========================
-// Medium RSS Feed Integration
+// MEDIUM RSS FEED
 // ===========================
 
 async function fetchMediumPosts() {
     const loading = document.getElementById('loading');
     const mediumGrid = document.getElementById('medium-content');
 
+    if (!loading || !mediumGrid) return;
+
     loading.classList.add('active');
 
     try {
-        // Medium RSS feed URL
-        const mediumUsername = 'krismaya1';
-        const rssUrl = `https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@${mediumUsername}`;
-
-        const response = await fetch(rssUrl);
+        const response = await fetch('https://api.rss2json.com/v1/api.json?rss_url=https://medium.com/feed/@krismaya1');
         const data = await response.json();
 
         if (data.status === 'ok') {
-            const posts = data.items.slice(0, 6); // Get latest 6 posts
-            displayMediumPosts(posts);
+            displayMediumPosts(data.items.slice(0, 4));
         } else {
-            throw new Error('Failed to fetch Medium posts');
+            throw new Error('Failed to fetch');
         }
     } catch (error) {
         console.error('Error fetching Medium posts:', error);
@@ -145,433 +304,141 @@ function displayMediumPosts(posts) {
     mediumGrid.innerHTML = '';
 
     posts.forEach((post, index) => {
-        const postCard = createBlogCard(post, index);
-        mediumGrid.appendChild(postCard);
-    });
-}
+        const card = document.createElement('article');
+        card.classList.add('blog-card');
+        card.style.animationDelay = `${index * 100}ms`;
 
-function createBlogCard(post, index) {
-    const card = document.createElement('div');
-    card.classList.add('blog-card');
-    card.style.animationDelay = `${index * 0.1}s`;
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = post.description;
+        const excerpt = tempDiv.textContent.slice(0, 120) + '...';
 
-    // Extract text content from description (remove HTML tags)
-    const tempDiv = document.createElement('div');
-    tempDiv.innerHTML = post.description;
-    const excerpt = tempDiv.textContent.slice(0, 150) + '...';
+        const date = new Date(post.pubDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric'
+        });
 
-    // Format date
-    const postDate = new Date(post.pubDate);
-    const formattedDate = postDate.toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric'
-    });
+        card.innerHTML = `
+            <div class="blog-card-inner">
+                <p class="blog-date">${date}</p>
+                <h3 class="blog-title">${post.title}</h3>
+                <p class="blog-excerpt">${excerpt}</p>
+                <a href="${post.link}" target="_blank" rel="noopener" class="blog-link">
+                    <span>READ_MORE</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        `;
 
-    card.innerHTML = `
-        <div class="blog-header">
-            <i class="fab fa-medium blog-source-icon"></i>
-            <span class="blog-date">${formattedDate}</span>
-        </div>
-        <h3 class="blog-title">${post.title}</h3>
-        <p class="blog-excerpt">${excerpt}</p>
-        <a href="${post.link}" target="_blank" rel="noopener" class="blog-link">
-            Read More <i class="fas fa-arrow-right"></i>
-        </a>
-    `;
+        card.addEventListener('click', (e) => {
+            if (e.target.tagName !== 'A') {
+                window.open(post.link, '_blank');
+            }
+        });
 
-    // Add click event to open post
-    card.addEventListener('click', (e) => {
-        if (e.target.tagName !== 'A') {
-            window.open(post.link, '_blank');
-        }
+        mediumGrid.appendChild(card);
     });
 
-    return card;
+    // Re-init 3D effects for new cards
+    init3DCards();
 }
 
 function displayFallbackContent() {
     const mediumGrid = document.getElementById('medium-content');
     mediumGrid.innerHTML = `
-        <div class="blog-card">
-            <div class="blog-header">
-                <i class="fab fa-medium blog-source-icon"></i>
-                <span class="blog-date">Visit Medium</span>
+        <article class="blog-card">
+            <div class="blog-card-inner">
+                <div class="blog-icon">
+                    <i class="fab fa-medium"></i>
+                </div>
+                <h3 class="blog-title">Visit My Medium Profile</h3>
+                <p class="blog-excerpt">
+                    Read my articles on AI, machine learning, and technology trends.
+                </p>
+                <a href="https://medium.com/@krismaya1" target="_blank" rel="noopener" class="blog-link">
+                    <span>VIEW_PROFILE</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
-            <h3 class="blog-title">Check out my latest articles on Medium</h3>
-            <p class="blog-excerpt">
-                I write about AI, machine learning, technology trends, and practical insights from building
-                intelligent systems. Follow me on Medium to stay updated with my latest thoughts and tutorials.
-            </p>
-            <a href="https://medium.com/@krismaya1" target="_blank" rel="noopener" class="blog-link">
-                Visit Medium Profile <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-        <div class="blog-card">
-            <div class="blog-header">
-                <i class="fas fa-brain blog-source-icon"></i>
-                <span class="blog-date">AI & ML</span>
-            </div>
-            <h3 class="blog-title">Exploring the Future of AI</h3>
-            <p class="blog-excerpt">
-                Deep dives into artificial intelligence, machine learning algorithms, and the practical
-                applications that are shaping our future.
-            </p>
-            <a href="https://medium.com/@krismaya1" target="_blank" rel="noopener" class="blog-link">
-                Read Articles <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
-        <div class="blog-card">
-            <div class="blog-header">
-                <i class="fas fa-code blog-source-icon"></i>
-                <span class="blog-date">Tech Insights</span>
-            </div>
-            <h3 class="blog-title">Building Scalable Systems</h3>
-            <p class="blog-excerpt">
-                Practical guides and lessons learned from architecting and deploying large-scale AI
-                and software systems in production.
-            </p>
-            <a href="https://medium.com/@krismaya1" target="_blank" rel="noopener" class="blog-link">
-                Explore Topics <i class="fas fa-arrow-right"></i>
-            </a>
-        </div>
+        </article>
     `;
 }
 
 // ===========================
-// Enhanced Scroll Animations
+// GLITCH EFFECT ON HOVER
 // ===========================
 
-// Scroll Reveal Observer
-const scrollRevealObserver = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.classList.add('revealed');
-            }, index * 50); // Stagger effect
-        }
-    });
-}, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-});
+function initGlitchHover() {
+    const glitchElements = document.querySelectorAll('.glitch-hover');
 
-// Observe all cards and elements
-document.addEventListener('DOMContentLoaded', () => {
-    // Observe project cards
-    document.querySelectorAll('.project-card').forEach((card, index) => {
-        card.classList.add('scroll-reveal-scale');
-        scrollRevealObserver.observe(card);
-    });
-
-    // Observe award cards
-    document.querySelectorAll('.award-card').forEach((card, index) => {
-        const direction = index % 2 === 0 ? 'scroll-reveal-left' : 'scroll-reveal-right';
-        card.classList.add(direction);
-        scrollRevealObserver.observe(card);
-    });
-
-    // Observe blog cards
-    document.querySelectorAll('.blog-card').forEach(card => {
-        card.classList.add('scroll-reveal');
-        scrollRevealObserver.observe(card);
-    });
-
-    // Observe expertise tags
-    document.querySelectorAll('.tag').forEach((tag, index) => {
-        tag.classList.add('scroll-reveal');
-        tag.style.transitionDelay = `${index * 0.05}s`;
-        scrollRevealObserver.observe(tag);
-    });
-
-    // Observe section titles
-    document.querySelectorAll('.section-title').forEach(title => {
-        title.classList.add('scroll-reveal');
-        scrollRevealObserver.observe(title);
-    });
-});
-
-// ===========================
-// Advanced Parallax Depth System
-// ===========================
-
-let parallaxTicking = false;
-
-function updateAdvancedParallax() {
-    const scrolled = window.pageYOffset;
-    const sections = document.querySelectorAll('.section');
-
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.offsetHeight;
-        const sectionScroll = scrolled - sectionTop;
-
-        // Only apply parallax when section is in view
-        if (sectionScroll > -window.innerHeight && sectionScroll < sectionHeight + window.innerHeight) {
-            // Background layer (slowest)
-            const bgLayers = section.querySelectorAll('.parallax-bg');
-            bgLayers.forEach(layer => {
-                const speed = 0.15;
-                layer.style.transform = `translateY(${sectionScroll * speed}px)`;
-            });
-
-            // Mid layer (medium speed)
-            const midLayers = section.querySelectorAll('.parallax-mid');
-            midLayers.forEach(layer => {
-                const speed = 0.35;
-                layer.style.transform = `translateY(${sectionScroll * speed}px)`;
-            });
-
-            // Front layer (fast)
-            const frontLayers = section.querySelectorAll('.parallax-front');
-            frontLayers.forEach(layer => {
-                const speed = 0.5;
-                const translateY = sectionScroll * speed * 0.1;
-                layer.style.transform = `translateY(${-translateY}px)`;
-            });
-
-            // Floating shapes with different speeds
-            const shapes = section.querySelectorAll('.floating-shape');
-            shapes.forEach((shape, index) => {
-                const speed = 0.2 + (index * 0.15);
-                const rotation = sectionScroll * 0.02;
-                shape.style.transform += ` translateY(${sectionScroll * speed}px) rotate(${rotation}deg)`;
-            });
-
-            // Cards with subtle parallax
-            const cards = section.querySelectorAll('.project-card, .award-card, .blog-card');
-            cards.forEach((card, index) => {
-                const cardRect = card.getBoundingClientRect();
-                const cardCenter = cardRect.top + cardRect.height / 2;
-                const screenCenter = window.innerHeight / 2;
-                const distance = (cardCenter - screenCenter) / screenCenter;
-                const translateY = distance * 20;
-
-                card.style.transform = `translateY(${translateY}px) translateZ(0)`;
-            });
-        }
-    });
-
-    parallaxTicking = false;
-}
-
-function requestAdvancedParallax() {
-    if (!parallaxTicking) {
-        window.requestAnimationFrame(updateAdvancedParallax);
-        parallaxTicking = true;
-    }
-}
-
-window.addEventListener('scroll', requestAdvancedParallax);
-
-// Initial call
-updateAdvancedParallax();
-
-// ===========================
-// 3D Card Tilt Effects
-// ===========================
-
-function add3DTiltEffect() {
-    const cards = document.querySelectorAll('.project-card, .award-card, .blog-card');
-
-    cards.forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-
-            const rotateX = ((y - centerY) / centerY) * -10;
-            const rotateY = ((x - centerX) / centerX) * 10;
-
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+    glitchElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            el.style.animation = 'glitchMain 0.3s';
         });
 
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale(1)';
+        el.addEventListener('animationend', () => {
+            el.style.animation = '';
         });
-
-        card.style.transition = 'transform 0.3s ease';
     });
 }
 
-// Initialize 3D tilt effects after DOM loads
-document.addEventListener('DOMContentLoaded', () => {
-    setTimeout(() => {
-        add3DTiltEffect();
-    }, 500);
-});
-
 // ===========================
-// Smooth Scroll for Anchor Links
+// INITIALIZE ALL ANIMATIONS
 // ===========================
 
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
+function initAnimations() {
+    typeEffect();
+    animateCounters();
+    initScrollReveal();
+    init3DCards();
+    initGlitchHover();
+    fetchMediumPosts();
+}
 
 // ===========================
-// Add Parallax Effect to Hero
+// ACTIVE NAV LINK ON SCROLL
 // ===========================
 
-window.addEventListener('scroll', () => {
-    const scrolled = window.pageYOffset;
-    const heroContent = document.querySelector('.hero-content');
-    const particles = document.querySelector('.particles');
+const sections = document.querySelectorAll('section[id]');
 
-    if (heroContent && scrolled < window.innerHeight) {
-        heroContent.style.transform = `translateY(${scrolled * 0.5}px)`;
-        heroContent.style.opacity = 1 - scrolled / 700;
-    }
-
-    if (particles && scrolled < window.innerHeight) {
-        particles.style.transform = `translateY(${scrolled * 0.3}px)`;
-    }
-});
-
-// ===========================
-// Scroll Navigation Dots
-// ===========================
-
-const scrollDots = document.querySelectorAll('.scroll-dot');
-const sections = document.querySelectorAll('.section, .hero');
-
-// Update active dot on scroll with Intersection Observer
 const navObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
-            const sectionId = entry.target.getAttribute('id');
-
-            scrollDots.forEach(dot => {
-                dot.classList.remove('active');
-                if (dot.getAttribute('data-section') === sectionId) {
-                    dot.classList.add('active');
+            const id = entry.target.getAttribute('id');
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${id}`) {
+                    link.classList.add('active');
                 }
             });
         }
     });
 }, {
-    threshold: 0.5, // Section is considered active when 50% visible
-    rootMargin: '0px'
+    threshold: 0.3,
+    rootMargin: '-100px 0px -50% 0px'
 });
 
-// Observe all sections
 sections.forEach(section => {
     navObserver.observe(section);
 });
 
 // ===========================
-// Initialize on Page Load
+// DYNAMIC YEAR
 // ===========================
 
-document.addEventListener('DOMContentLoaded', () => {
-    // Fetch Medium posts
-    fetchMediumPosts();
-
-    // Initial animation check
-    animateOnScroll();
-
-    // Add entrance animation to hero
-    const heroContent = document.querySelector('.hero-content');
-    if (heroContent) {
-        setTimeout(() => {
-            heroContent.style.opacity = '1';
-            heroContent.style.transform = 'translateY(0)';
-        }, 100);
-    }
-});
-
-// ===========================
-// Loading Animation
-// ===========================
-
-window.addEventListener('load', () => {
-    document.body.classList.add('loaded');
-
-    // Trigger animations after load
-    setTimeout(() => {
-        const sections = document.querySelectorAll('.section');
-        sections.forEach((section, index) => {
-            setTimeout(() => {
-                section.style.opacity = '1';
-                section.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
-    }, 300);
-});
-
-// ===========================
-// Typing Effect for Hero Title (Optional Enhancement)
-// ===========================
-
-function addTypingEffect() {
-    const subtitle = document.querySelector('.hero-subtitle');
-    if (!subtitle) return;
-
-    const text = subtitle.textContent;
-    subtitle.textContent = '';
-    subtitle.style.opacity = '1';
-
-    let index = 0;
-    const speed = 50;
-
-    function type() {
-        if (index < text.length) {
-            subtitle.textContent += text.charAt(index);
-            index++;
-            setTimeout(type, speed);
-        }
-    }
-
-    // Uncomment to enable typing effect
-    // setTimeout(type, 500);
+const yearElement = document.getElementById('currentYear');
+if (yearElement) {
+    yearElement.textContent = new Date().getFullYear();
 }
 
 // ===========================
-// Performance Optimization
-// ===========================
-
-// Debounce scroll events
-function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-        const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-        };
-        clearTimeout(timeout);
-        timeout = setTimeout(later, wait);
-    };
-}
-
-// Optimize scroll event listeners
-const optimizedScroll = debounce(() => {
-    animateOnScroll();
-}, 10);
-
-window.addEventListener('scroll', optimizedScroll);
-
-// ===========================
-// Error Handling
+// ERROR HANDLING
 // ===========================
 
 window.addEventListener('error', (e) => {
-    console.error('An error occurred:', e.error);
+    console.error('Error:', e.error);
 });
 
-// Handle unhandled promise rejections
 window.addEventListener('unhandledrejection', (e) => {
-    console.error('Unhandled promise rejection:', e.reason);
+    console.error('Unhandled rejection:', e.reason);
 });
