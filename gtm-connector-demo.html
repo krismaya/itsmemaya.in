@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Agentic RAG in Practice — Connecting Claude to Enterprise Data with MCP · Audience · Light</title>
+<title>Agentic RAG in Practice — Connecting Claude to Enterprise Data with MCP · Light</title>
 
 <!-- Fonts: Midnight Blue preset (Manrope headings / DM Sans body) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -635,6 +635,9 @@ body.icons-ready .msr { display: inline-block; }
       <span class="conn">→</span>
       <div class="node"><span class="t"><span class="msr" aria-hidden="true">account_balance</span>Your bank</span><span class="d">the money never left it</span></div>
     </div>
+    <p class="why reveal"><b>Why it matters</b>UPI didn't move anyone's money into one giant account.
+    It put <strong>one interface over every bank</strong>. That is the whole idea behind this talk: our
+    go-to-market data stays exactly where it lives, and becomes reachable in one question.</p>
   </div>
 </section>
 
@@ -681,6 +684,12 @@ body.icons-ready .msr { display: inline-block; }
       <div class="metric vec"><span class="k"><span class="msr" aria-hidden="true">slideshow</span>Sales collateral</span><span class="v">765</span>
         <span class="d">Decks, PDFs, docs, video — tagged by region and shareability.</span></div>
     </div>
+    <p class="why reveal"><b>Why it matters</b>The three <strong>indigo</strong> ones are neat tables, like a
+    spreadsheet — you can ask "show me every deal over $50,000" and get an exact answer. The
+    three <strong>cyan</strong> ones are just things people wrote or said. There are no columns
+    to filter on, so you have to search by what the words <em>mean</em>. Most systems do one or
+    the other. This one does both — which is how you can ask "which customers pay us the most,
+    and what were they unhappy about last month?" and get a single answer.</p>
   </div>
 </section>
 
@@ -701,6 +710,9 @@ body.icons-ready .msr { display: inline-block; }
       <span class="conn">→</span>
       <div class="node vecn"><span class="t"><span class="msr" aria-hidden="true">fact_check</span>It answers</span><span class="d">with the working shown</span></div>
     </div>
+    <p class="why reveal"><b>Why it matters</b>There is nothing new to learn. The question <em>is</em> the
+    interface. A sales rep, a manager and an analyst can type the same sentence and each get
+    a useful answer back.</p>
   </div>
 </section>
 
@@ -723,6 +735,8 @@ body.icons-ready .msr { display: inline-block; }
       <div class="qcard"><q>Summarise this deal's history before my call in ten minutes.</q>
         <span class="src">everything above · at once</span></div>
     </div>
+    <p class="why reveal"><b>Why it matters</b>The last one used to take an hour of prep.
+    It's the question that changed how the team works.</p>
   </div>
 </section>
 
@@ -742,6 +756,9 @@ body.icons-ready .msr { display: inline-block; }
       <span class="conn">→</span>
       <div class="node"><span class="t"><span class="msr" aria-hidden="true">dns</span>Our systems</span><span class="d">read-only · validated</span></div>
     </div>
+    <p class="why reveal"><b>Why it matters</b>If we never built a tool for it, the AI simply cannot do
+    it — the same way a UPI app cannot do anything the bank hasn't exposed. That is how it reads real
+    customer data without ever holding real access to the database.</p>
   </div>
 </section>
 
@@ -794,6 +811,9 @@ body.icons-ready .msr { display: inline-block; }
       <rect x="806" y="284" width="9" height="9" rx="2" fill="var(--accent-secondary)"/>
       <text class="cap2" x="822" y="292">semantic</text>
     </svg>
+    <p class="why reveal"><b>Why it matters</b>One service, one login, one thing to deploy. 18 tools in total —
+    6 for CRM, 7 for email, 3 for collateral, 2 for meetings. Adding a new data source later
+    means writing a few more tools, not standing up another server.</p>
   </div>
 </section>
 
@@ -817,6 +837,9 @@ body.icons-ready .msr { display: inline-block; }
         <li>Queries are assembled from <b>validated parts</b>, never from raw model output.</li>
       </ul>
     </div>
+    <p class="why reveal"><b>Why it matters</b>"We gave the AI access to our CRM" sounds alarming. It isn't,
+    because of the three rules above: it can only read, it can only touch tables we listed by
+    name, and it never writes its own SQL.</p>
   </div>
 </section>
 
@@ -844,6 +867,11 @@ body.icons-ready .msr { display: inline-block; }
         <div class="r"><span class="lbl">Webex</span><span class="track"><span class="fill" data-w="0.4%"></span></span><span class="val">1</span></div>
       </div>
     </div>
+    <p class="why reveal"><b>Why it matters</b>Say you search for "budget concerns". The customer never used
+    those words — they said "this is too expensive" and "I need finance to sign off".
+    Keyword search finds nothing. Meaning-based search finds both. We keep these meanings in
+    the <strong>same database</strong> as everything else, so you can still narrow by date or
+    company the ordinary way.</p>
   </div>
 </section>
 
@@ -871,6 +899,10 @@ body.icons-ready .msr { display: inline-block; }
         <div class="r"><span class="lbl">Companies</span><span class="track"><span class="fill" data-w="6.2%"></span></span><span class="val">3,878</span></div>
       </div>
     </div>
+    <p class="why reveal"><b>Why it matters</b>Look at the sizes. 62,515 notes are filed against individual
+    people and only 3,878 against the company itself. So opening the company record shows you
+    almost nothing — <strong>the story is scattered across the people</strong>. Following the
+    trail is the only way to see all of it.</p>
   </div>
 </section>
 
@@ -897,6 +929,9 @@ body.icons-ready .msr { display: inline-block; }
         </ul>
       </div>
     </div>
+    <p class="why reveal"><b>Why it matters</b>Two people can ask the exact same question and correctly get
+    different answers — a finance lead sees revenue, a sales rep does not. The rules live
+    inside the connector, so <strong>rephrasing the question doesn't get you past them</strong>.</p>
   </div>
 </section>
 
