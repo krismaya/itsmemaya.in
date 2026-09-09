@@ -52,10 +52,10 @@ function createParticles() {
         particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
         particle.style.animationDelay = (Math.random() * 10) + 's';
 
-        // Random colors
-        const colors = ['#00f5ff', '#ff00ff', '#b14aed', '#00ff88'];
+        // Random colors — light-theme accents, softened so they read as texture on paper
+        const colors = ['#087287', '#b0119b', '#7b34c4', '#0a7a4a'];
         particle.style.background = colors[Math.floor(Math.random() * colors.length)];
-        particle.style.boxShadow = `0 0 10px ${particle.style.background}`;
+        particle.style.boxShadow = `0 0 6px ${particle.style.background}66`;
 
         container.appendChild(particle);
     }

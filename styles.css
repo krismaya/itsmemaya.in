@@ -1,31 +1,44 @@
 /* ===========================
-   CYBERPUNK THEME VARIABLES
+   CYBERPUNK THEME VARIABLES — LIGHT
+   Neon-on-black translated to ink-on-paper: the hues are kept
+   but darkened so they hold as text, and bloom becomes elevation.
    =========================== */
 
 :root {
     /* Core Colors */
-    --bg-dark: #0a0a0f;
-    --bg-darker: #050508;
-    --bg-card: rgba(15, 15, 25, 0.8);
+    --bg-dark: #f2f5f9;
+    --bg-darker: #e7ecf3;
+    --bg-card: rgba(255, 255, 255, 0.94);
 
-    /* Neon Colors */
-    --neon-cyan: #00f5ff;
-    --neon-magenta: #ff00ff;
-    --neon-purple: #b14aed;
-    --neon-blue: #4d7cff;
-    --neon-green: #00ff88;
-    --neon-yellow: #ffff00;
-    --neon-orange: #ff6b35;
+    /* Accent Colors — same hues as the neons, weighted for paper */
+    --neon-cyan: #087287;
+    --neon-magenta: #b0119b;
+    --neon-purple: #7b34c4;
+    --neon-blue: #2a5bd7;
+    --neon-green: #0a7a4a;
+    --neon-yellow: #9a6a00;
+    --neon-orange: #c4471a;
 
     /* Text */
-    --text-primary: #ffffff;
-    --text-secondary: #8892b0;
-    --text-muted: #495670;
+    --text-primary: #0d1424;
+    --text-secondary: #3f4a63;
+    --text-muted: #5c6780;
 
-    /* Glow Effects */
-    --glow-cyan: 0 0 20px rgba(0, 245, 255, 0.5), 0 0 40px rgba(0, 245, 255, 0.3);
-    --glow-magenta: 0 0 20px rgba(255, 0, 255, 0.5), 0 0 40px rgba(255, 0, 255, 0.3);
-    --glow-purple: 0 0 20px rgba(177, 74, 237, 0.5), 0 0 40px rgba(177, 74, 237, 0.3);
+    /* Hairlines & fills */
+    --line-soft: rgba(13, 20, 36, 0.10);
+    --lift: 0 1px 2px rgba(13, 20, 36, 0.05), 0 10px 24px -14px rgba(13, 20, 36, 0.18);
+    --line-strong: rgba(13, 20, 36, 0.16);
+    --tint-cyan: rgba(8, 114, 135, 0.08);
+    --tint-cyan-strong: rgba(8, 114, 135, 0.16);
+
+    /* Elevation — what the neon bloom becomes on a light ground */
+    --glow-cyan: 0 0 0 1px rgba(8, 114, 135, 0.30), 0 8px 22px -8px rgba(8, 114, 135, 0.55);
+    --glow-magenta: 0 0 0 1px rgba(176, 17, 155, 0.30), 0 8px 22px -8px rgba(176, 17, 155, 0.55);
+    --glow-purple: 0 0 0 1px rgba(123, 52, 196, 0.30), 0 8px 22px -8px rgba(123, 52, 196, 0.55);
+
+    /* Glowing text just reads as blur on paper — colour carries the emphasis */
+    --text-glow-cyan: none;
+    --text-glow-magenta: none;
 
     /* Fonts */
     --font-display: 'Orbitron', sans-serif;
@@ -130,7 +143,7 @@ body {
 .loader-bar {
     width: 200px;
     height: 3px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--line-soft);
     border-radius: 3px;
     overflow: hidden;
 }
@@ -162,12 +175,12 @@ body {
         0deg,
         transparent,
         transparent 2px,
-        rgba(0, 0, 0, 0.1) 2px,
-        rgba(0, 0, 0, 0.1) 4px
+        rgba(8, 114, 135, 0.05) 2px,
+        rgba(8, 114, 135, 0.05) 4px
     );
     pointer-events: none;
     z-index: 9999;
-    opacity: 0.3;
+    opacity: 0.5;
 }
 
 /* ===========================
@@ -178,13 +191,13 @@ body {
     position: fixed;
     width: 300px;
     height: 300px;
-    background: radial-gradient(circle, rgba(0, 245, 255, 0.15), transparent 70%);
+    background: radial-gradient(circle, rgba(8, 114, 135, 0.13), transparent 70%);
     border-radius: 50%;
     pointer-events: none;
     z-index: 9998;
     transform: translate(-50%, -50%);
     transition: opacity 0.3s ease;
-    mix-blend-mode: screen;
+    mix-blend-mode: multiply;
 }
 
 /* ===========================
@@ -198,8 +211,8 @@ body {
     width: 100%;
     height: 100%;
     background-image:
-        linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+        linear-gradient(rgba(8, 114, 135, 0.09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(8, 114, 135, 0.09) 1px, transparent 1px);
     background-size: 50px 50px;
     pointer-events: none;
     z-index: 0;
@@ -226,7 +239,7 @@ body {
     height: 4px;
     background: var(--neon-cyan);
     border-radius: 50%;
-    box-shadow: 0 0 10px var(--neon-cyan);
+    box-shadow: 0 0 6px rgba(8, 114, 135, 0.35);
     animation: particleFloat linear infinite;
 }
 
@@ -236,10 +249,10 @@ body {
         opacity: 0;
     }
     10% {
-        opacity: 1;
+        opacity: 0.45;
     }
     90% {
-        opacity: 1;
+        opacity: 0.45;
     }
     100% {
         transform: translateY(-100px) translateX(100px);
@@ -262,9 +275,9 @@ body {
 }
 
 .nav.scrolled {
-    background: rgba(10, 10, 15, 0.95);
+    background: rgba(255, 255, 255, 0.88);
     backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+    border-bottom: 1px solid rgba(8, 114, 135, 0.16);
     padding: 1rem 3rem;
 }
 
@@ -288,7 +301,7 @@ body {
 
 .logo-bracket {
     color: var(--neon-cyan);
-    text-shadow: var(--glow-cyan);
+    text-shadow: var(--text-glow-cyan);
 }
 
 .logo-text {
@@ -298,7 +311,7 @@ body {
 
 .nav-logo:hover .logo-text {
     color: var(--neon-cyan);
-    text-shadow: var(--glow-cyan);
+    text-shadow: var(--text-glow-cyan);
 }
 
 .nav-links {
@@ -332,7 +345,7 @@ body {
 
 .nav-link:hover {
     color: var(--neon-cyan);
-    text-shadow: var(--glow-cyan);
+    text-shadow: var(--text-glow-cyan);
 }
 
 .nav-link:hover::before {
@@ -350,7 +363,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--line-strong);
     color: var(--text-secondary);
     text-decoration: none;
     transition: all 0.3s ease;
@@ -361,7 +374,7 @@ body {
     border-color: var(--neon-cyan);
     color: var(--neon-cyan);
     box-shadow: var(--glow-cyan);
-    background: rgba(0, 245, 255, 0.1);
+    background: var(--tint-cyan);
 }
 
 /* Mobile Menu */
@@ -373,8 +386,8 @@ body {
     z-index: 1001;
     width: 50px;
     height: 50px;
-    background: rgba(10, 10, 15, 0.9);
-    border: 1px solid rgba(0, 245, 255, 0.3);
+    background: rgba(255, 255, 255, 0.92);
+    border: 1px solid rgba(8, 114, 135, 0.35);
     cursor: pointer;
     flex-direction: column;
     justify-content: center;
@@ -389,7 +402,7 @@ body {
     height: 2px;
     background: var(--neon-cyan);
     transition: all 0.3s ease;
-    box-shadow: 0 0 5px var(--neon-cyan);
+    box-shadow: none;
 }
 
 .mobile-menu-btn.active span:nth-child(1) {
@@ -457,7 +470,7 @@ body {
     font-weight: 900;
     text-transform: uppercase;
     position: relative;
-    text-shadow: var(--glow-cyan);
+    text-shadow: var(--text-glow-cyan);
     animation: glitchMain 5s infinite;
 }
 
@@ -536,7 +549,7 @@ body {
 
 .highlight {
     color: var(--neon-cyan);
-    text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+    text-shadow: var(--text-glow-cyan);
 }
 
 /* Hero Stats */
@@ -558,7 +571,7 @@ body {
     font-size: 3rem;
     font-weight: 700;
     color: var(--neon-cyan);
-    text-shadow: var(--glow-cyan);
+    text-shadow: var(--text-glow-cyan);
     display: block;
 }
 
@@ -611,7 +624,7 @@ body {
     left: -100%;
     width: 100%;
     height: 100%;
-    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.45), transparent);
     transition: left 0.5s ease;
 }
 
@@ -637,7 +650,7 @@ body {
 }
 
 .btn-secondary:hover {
-    background: rgba(0, 245, 255, 0.1);
+    background: var(--tint-cyan);
     box-shadow: var(--glow-cyan);
     transform: translateY(-3px);
 }
@@ -672,7 +685,7 @@ body {
 .scroll-line {
     width: 1px;
     height: 60px;
-    background: rgba(255, 255, 255, 0.1);
+    background: var(--line-strong);
     position: relative;
     overflow: hidden;
 }
@@ -685,7 +698,7 @@ body {
     position: absolute;
     left: -1px;
     animation: scrollDown 2s infinite;
-    box-shadow: 0 0 10px var(--neon-cyan);
+    box-shadow: 0 0 0 4px rgba(8, 114, 135, 0.16);
 }
 
 @keyframes scrollDown {
@@ -720,7 +733,7 @@ body {
     font-family: var(--font-mono);
     font-size: 1rem;
     color: var(--neon-cyan);
-    text-shadow: var(--glow-cyan);
+    text-shadow: var(--text-glow-cyan);
 }
 
 .section-title {
@@ -737,7 +750,7 @@ body {
 
 .glitch-hover:hover {
     animation: glitchMain 0.3s;
-    text-shadow: var(--glow-cyan);
+    text-shadow: var(--text-glow-cyan);
     color: var(--neon-cyan);
 }
 
@@ -775,7 +788,8 @@ body {
 
 .skills-container {
     background: var(--bg-card);
-    border: 1px solid rgba(0, 245, 255, 0.1);
+    border: 1px solid rgba(8, 114, 135, 0.18);
+    box-shadow: var(--lift);
     padding: 2rem;
     clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px));
 }
@@ -798,7 +812,7 @@ body {
     align-items: center;
     gap: 1rem;
     padding: 1rem;
-    background: rgba(0, 245, 255, 0.05);
+    background: var(--tint-cyan);
     border: 1px solid transparent;
     transition: all 0.3s ease;
     cursor: default;
@@ -806,7 +820,7 @@ body {
 
 .skill-item:hover {
     border-color: var(--neon-cyan);
-    box-shadow: inset 0 0 20px rgba(0, 245, 255, 0.1);
+    box-shadow: inset 0 0 20px rgba(8, 114, 135, 0.09);
     transform: translateX(5px);
 }
 
@@ -842,7 +856,8 @@ body {
 
 .project-card-inner {
     background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line-soft);
+    box-shadow: var(--lift);
     padding: 2rem;
     position: relative;
     transition: all 0.4s ease;
@@ -853,7 +868,7 @@ body {
 .project-card:hover .project-card-inner {
     border-color: var(--neon-cyan);
     transform: translateY(-10px) rotateX(5deg);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), var(--glow-cyan);
+    box-shadow: 0 18px 36px -14px rgba(13, 20, 36, 0.22), var(--glow-cyan);
 }
 
 .project-glow {
@@ -862,7 +877,7 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: linear-gradient(135deg, rgba(0, 245, 255, 0.1), transparent);
+    background: linear-gradient(135deg, rgba(8, 114, 135, 0.09), transparent);
     opacity: 0;
     transition: opacity 0.3s ease;
     pointer-events: none;
@@ -885,7 +900,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(177, 74, 237, 0.2));
+    background: linear-gradient(135deg, rgba(8, 114, 135, 0.20), rgba(123, 52, 196, 0.20));
     color: var(--neon-cyan);
     font-size: 1.3rem;
     clip-path: polygon(10% 0, 100% 0, 100% 90%, 90% 100%, 0 100%, 0 10%);
@@ -900,15 +915,15 @@ body {
 }
 
 .status-live {
-    background: rgba(0, 255, 136, 0.15);
+    background: rgba(10, 122, 74, 0.12);
     color: var(--neon-green);
-    border: 1px solid rgba(0, 255, 136, 0.3);
+    border: 1px solid rgba(10, 122, 74, 0.35);
 }
 
 .status-ongoing {
-    background: rgba(255, 255, 0, 0.15);
+    background: rgba(154, 106, 0, 0.12);
     color: var(--neon-yellow);
-    border: 1px solid rgba(255, 255, 0, 0.3);
+    border: 1px solid rgba(154, 106, 0, 0.35);
 }
 
 .project-title {
@@ -921,7 +936,7 @@ body {
 
 .project-card:hover .project-title {
     color: var(--neon-cyan);
-    text-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+    text-shadow: var(--text-glow-cyan);
 }
 
 .project-title.has-tagline {
@@ -960,9 +975,9 @@ body {
     font-family: var(--font-mono);
     font-size: 0.75rem;
     padding: 0.4rem 0.8rem;
-    background: rgba(0, 245, 255, 0.1);
+    background: rgba(8, 114, 135, 0.09);
     color: var(--neon-cyan);
-    border: 1px solid rgba(0, 245, 255, 0.2);
+    border: 1px solid rgba(8, 114, 135, 0.28);
 }
 
 /* ===========================
@@ -981,7 +996,7 @@ body {
     bottom: 0;
     width: 2px;
     background: linear-gradient(180deg, var(--neon-cyan), var(--neon-purple), var(--neon-magenta));
-    box-shadow: 0 0 10px rgba(0, 245, 255, 0.5);
+    box-shadow: 0 0 8px rgba(8, 114, 135, 0.30);
 }
 
 .award-item {
@@ -997,13 +1012,14 @@ body {
     font-weight: 700;
     color: var(--neon-cyan);
     min-width: 60px;
-    text-shadow: var(--glow-cyan);
+    text-shadow: var(--text-glow-cyan);
 }
 
 .award-content {
     flex: 1;
     background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line-soft);
+    box-shadow: var(--lift);
     padding: 2rem;
     position: relative;
     transition: all 0.3s ease;
@@ -1011,7 +1027,7 @@ body {
 
 .award-item:hover .award-content {
     border-color: var(--neon-cyan);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3), var(--glow-cyan);
+    box-shadow: 0 12px 28px -12px rgba(13, 20, 36, 0.20), var(--glow-cyan);
     transform: translateX(10px);
 }
 
@@ -1059,7 +1075,7 @@ body {
 }
 
 .award-link:hover {
-    text-shadow: var(--glow-cyan);
+    text-shadow: var(--text-glow-cyan);
     gap: 0.75rem;
 }
 
@@ -1079,7 +1095,7 @@ body {
     font-weight: 600;
     padding: 1rem 2rem;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--line-strong);
     color: var(--text-secondary);
     cursor: pointer;
     display: flex;
@@ -1095,7 +1111,7 @@ body {
 }
 
 .tab-btn.active {
-    background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(177, 74, 237, 0.2));
+    background: linear-gradient(135deg, rgba(8, 114, 135, 0.14), rgba(123, 52, 196, 0.14));
     border-color: var(--neon-cyan);
     color: var(--neon-cyan);
     box-shadow: var(--glow-cyan);
@@ -1114,7 +1130,7 @@ body {
 .loader-ring {
     width: 50px;
     height: 50px;
-    border: 3px solid rgba(255, 255, 255, 0.1);
+    border: 3px solid var(--line-soft);
     border-top-color: var(--neon-cyan);
     border-radius: 50%;
     margin: 0 auto 1rem;
@@ -1149,7 +1165,8 @@ body {
 
 .blog-card-inner {
     background: var(--bg-card);
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line-soft);
+    box-shadow: var(--lift);
     padding: 2rem;
     transition: all 0.4s ease;
     transform-style: preserve-3d;
@@ -1158,7 +1175,7 @@ body {
 .blog-card:hover .blog-card-inner {
     border-color: var(--neon-magenta);
     transform: translateY(-5px);
-    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4), var(--glow-magenta);
+    box-shadow: 0 14px 30px -12px rgba(13, 20, 36, 0.20), var(--glow-magenta);
 }
 
 .blog-icon {
@@ -1205,7 +1222,7 @@ body {
 }
 
 .blog-link:hover {
-    text-shadow: var(--glow-magenta);
+    text-shadow: var(--text-glow-magenta);
     gap: 0.75rem;
 }
 
@@ -1216,7 +1233,7 @@ body {
 .footer {
     padding: 4rem 2rem;
     background: var(--bg-darker);
-    border-top: 1px solid rgba(0, 245, 255, 0.1);
+    border-top: 1px solid rgba(8, 114, 135, 0.18);
     text-align: center;
 }
 
@@ -1247,7 +1264,7 @@ body {
 
 .footer-links a:hover {
     color: var(--neon-cyan);
-    text-shadow: var(--glow-cyan);
+    text-shadow: var(--text-glow-cyan);
     transform: translateY(-3px);
 }
 
@@ -1326,7 +1343,7 @@ body {
         left: 0;
         right: 0;
         bottom: 0;
-        background: rgba(10, 10, 15, 0.98);
+        background: rgba(242, 245, 249, 0.98);
         flex-direction: column;
         justify-content: center;
         align-items: center;
