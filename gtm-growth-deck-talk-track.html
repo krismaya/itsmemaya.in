@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Your GTM Brain: Talk Track · Friday Collective #37</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f4f6fc; --surface: #ffffff; --text: #1a1f36; --text-strong: #0b1020; --muted: #5a6488;
+  --accent: #4f46e5; --accent2: #0e7490; --line: rgba(26,31,54,0.14); --line-soft: rgba(26,31,54,0.08);
+}
+@media (prefers-color-scheme: dark) {
+  :root { --bg: #0f1224; --surface: #181c33; --text: #e6e9f7; --text-strong: #ffffff; --muted: #9aa3c7;
+          --accent: #8b85ff; --accent2: #38bdd8; --line: rgba(230,233,247,0.16); --line-soft: rgba(230,233,247,0.08); }
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-font-smoothing: antialiased; scroll-behavior: smooth; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font-family: 'DM Sans', system-ui, sans-serif; font-size: 1.05rem; line-height: 1.65;
+  background-image: radial-gradient(ellipse at 15% 0%, rgba(79,70,229,0.10), transparent 50%),
+                    radial-gradient(ellipse at 90% 10%, rgba(14,116,144,0.08), transparent 45%);
+  background-repeat: no-repeat;
+}
+main { max-width: 780px; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+h1, h2, h3 { font-family: 'Manrope', system-ui, sans-serif; color: var(--text-strong); letter-spacing: -0.02em; line-height: 1.2; }
+h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); font-weight: 800; margin: 0 0 0.75rem;
+     background: linear-gradient(92deg, var(--accent), var(--accent2)); -webkit-background-clip: text; background-clip: text; color: transparent; }
+h2 { font-size: clamp(1.25rem, 3vw, 1.6rem); font-weight: 800; margin: 3rem 0 0.9rem; padding-top: 1.4rem; border-top: 1px solid var(--line); }
+h2:first-of-type { margin-top: 2rem; }
+h3 { font-size: 1.1rem; font-weight: 700; margin: 1.6rem 0 0.5rem; }
+p { margin: 0.7rem 0; }
+b, strong { color: var(--text-strong); font-weight: 700; }
+a { color: var(--accent2); }
+hr { border: 0; height: 1px; background: var(--line); margin: 2.5rem 0; }
+blockquote { margin: 1rem 0; padding: 0.9rem 1.2rem; border-left: 3px solid var(--accent2); background: var(--surface);
+             border-radius: 0 12px 12px 0; color: var(--text); font-weight: 500; }
+blockquote p { margin: 0; }
+ul, ol { padding-left: 1.3rem; } li { margin: 0.35rem 0; } li::marker { color: var(--accent2); }
+code { font-size: 0.9em; background: var(--line-soft); padding: 0.1em 0.4em; border-radius: 6px; }
+.tablewrap { overflow-x: auto; margin: 1.2rem 0; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+table { border-collapse: collapse; width: 100%; font-size: 0.93rem; }
+th, td { padding: 0.6rem 0.85rem; text-align: left; vertical-align: top; border-bottom: 1px solid var(--line-soft); }
+th { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+tr:last-child td { border-bottom: 0; }
+.toplink { position: fixed; right: 1rem; bottom: 1rem; background: var(--surface); border: 1px solid var(--line); color: var(--text);
+           padding: 0.5rem 0.9rem; border-radius: 999px; font-size: 0.85rem; text-decoration: none; }
+@media print { .toplink { display: none; } body { background: #fff; color: #000; } h1 { color: #000; background: none; } }
+</style>
+</head>
+<body>
+<main>
+<h1>Your GTM Brain: talk track (30 minutes)</h1>
+<p><strong>Event:</strong> Friday Collective #37 · Chennai marketers &amp; founders<br />
+<strong>Deck:</strong> <code>gtm-growth-deck.html</code> (16 slides)</p>
+<h2>The story in one line</h2>
+<blockquote>
+<p>Your leads, campaigns and sales calls already hold the answer to "what's actually driving revenue?". It's just scattered. We gave it one brain you can ask in plain English, and that is what lets sales and marketing finally work from the same truth.</p>
+</blockquote>
+<h2>The arc</h2>
+<p>Problem (everyone sees a slice) → Idea (one question, every source) → Why it matters to marketers, ABM teams and founders → How it stays safe (light tech) → Live demo → What to take home.</p>
+<h2>Timing at a glance</h2>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Slide</th>
+<th>Min</th>
+<th>Job of the slide</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Title</td>
+<td>1:00</td>
+<td>Set the promise</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Leads are coming in, the dots don't connect</td>
+<td>2:00</td>
+<td>Make them nod</td>
+</tr>
+<tr>
+<td>3</td>
+<td>Everyone sees a slice</td>
+<td>2:00</td>
+<td>Name the sales/marketing gap</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Numbers say what, conversations say why</td>
+<td>2:00</td>
+<td>Introduce the two kinds of data</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Meet the GTM brain</td>
+<td>2:30</td>
+<td>The core idea (UPI story)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Different question for every role</td>
+<td>2:00</td>
+<td>Make it concrete</td>
+</tr>
+<tr>
+<td>7</td>
+<td>For marketers</td>
+<td>2:00</td>
+<td>Voice of customer</td>
+</tr>
+<tr>
+<td>8</td>
+<td>An account is a group of people</td>
+<td>1:30</td>
+<td>Real data insight</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Closing the loop</td>
+<td>1:30</td>
+<td>Weekly, not quarterly</td>
+</tr>
+<tr>
+<td>10</td>
+<td>For founders</td>
+<td>1:30</td>
+<td>How to start small</td>
+</tr>
+<tr>
+<td>11</td>
+<td>How the brain connects</td>
+<td>1:30</td>
+<td>The only tech slide</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Trust: the three rules</td>
+<td>1:30</td>
+<td>Remove the fear</td>
+</tr>
+<tr>
+<td>13</td>
+<td>Live demo</td>
+<td>5:00</td>
+<td>Proof</td>
+</tr>
+<tr>
+<td>14</td>
+<td>Takeaways</td>
+<td>1:00</td>
+<td>Land the message</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Q&amp;A cards</td>
+<td>2:00</td>
+<td>Pre-empt the usual questions</td>
+</tr>
+<tr>
+<td>16</td>
+<td>Thank you</td>
+<td>0:30</td>
+<td>Contact, then open Q&amp;A</td>
+</tr>
+<tr>
+<td></td>
+<td><strong>Total</strong></td>
+<td><strong>30:00</strong></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>If you run long, cut slide 8 or 9 to one sentence. Never cut the demo below 4 minutes.</p>
+<hr />
+<h2>Slide 1 · Title (1:00)</h2>
+<p><strong>Say:</strong>
+"Good evening, everyone. I'm Maya. I run RevOps technology at Kissflow, which means my job is to make sure sales, marketing and customer success can all see the same customer. Over the next half hour I want to show you something we built, and more importantly, what it changes about how a sales and marketing team works together. It's called the GTM connector, and I like to call it a GTM brain."</p>
+<p><strong>Optional hook:</strong> "Show of hands: who has spent an hour trying to find out why a deal was lost?"</p>
+<p><strong>Transition:</strong> "Let me start with a problem I think every person in this room has lived."</p>
+<h2>Slide 2 · The dots don't connect (2:00)</h2>
+<p><strong>Say:</strong>
+"Leads are coming in. Campaigns are running. Sales conversations are happening. And then a founder asks: 'What's actually driving revenue?' To answer that honestly, someone opens the CRM, then the billing tool, then a usage report. Then they hunt for the call recording and search the inbox. That's about an hour."</p>
+<p>"Notice what happens next. Because it takes an hour, <strong>most of the time nobody asks</strong>."</p>
+<p>Point at the three numbers: six systems, seven-plus formats, about an hour.</p>
+<p><strong>Land it:</strong> "The data isn't missing. It's unreachable."</p>
+<p><strong>Transition:</strong> "And this is why marketing and sales so often talk past each other."</p>
+<h2>Slide 3 · Everyone sees a slice (2:00)</h2>
+<p><strong>Say:</strong> Walk the four cards quickly, one sentence each.
+- Marketing sees clicks, form fills and pipeline sourced. It knows who showed up, not what happened on the call.
+- Sales knows why a deal stalled, but it lives in notes nobody reads.
+- Customer success sees who is drifting away, long before the renewal.
+- Founders get a tidy board deck of a story they never got to read.</p>
+<p><strong>Key line:</strong> "'Marketing leads are weak' and 'Sales doesn't follow up' are often the same disagreement, argued from two partial views. The fix isn't another meeting. It's one place where everybody can ask the same question."</p>
+<p><strong>Transition:</strong> "So what's actually in that data?"</p>
+<h2>Slide 4 · Numbers say what, conversations say why (2:00)</h2>
+<p><strong>Say:</strong>
+"Our go-to-market data comes in two kinds. The top row is <strong>neat tables</strong>: CRM deals, billing, product usage. You can ask 'show me every deal over $50,000' and get an exact answer. The bottom row is <strong>what people said and wrote</strong>: 8,718 sales calls, 89,955 emails, 765 pieces of collateral."</p>
+<p>"Numbers tell you <strong>what</strong> happened. Conversations tell you <strong>why</strong>. Most tools handle one kind. The useful questions need both. For example: 'Which customers pay us the most, and what were they unhappy about last month?'"</p>
+<p><strong>Transition:</strong> "So what if you could ask that question in one sentence?"</p>
+<h2>Slide 5 · Meet the GTM brain (2:30)</h2>
+<p><strong>Say (UPI story):</strong>
+"Think about life before UPI. Your money wasn't missing. It was hard to reach. Six banks, six apps, six logins. To send someone ₹500 you needed an account number, an IFSC code, a beneficiary added and approved. UPI didn't pool anyone's money into one giant account. It put <strong>one interface over every bank</strong>."</p>
+<p>"We did the same for go-to-market data. Nothing was copied into a new mega-tool. The data stays where it lives. You type an ordinary sentence, and the system plans which sources to check, looks, and answers with its working shown."</p>
+<p>Walk the four boxes: You ask → It plans → It looks → It answers.</p>
+<p><strong>Key line:</strong> "There's nothing new to learn. The question <em>is</em> the interface."</p>
+<p><strong>Transition:</strong> "Let me show you what people actually ask."</p>
+<h2>Slide 6 · Same data, different question for every role (2:00)</h2>
+<p><strong>Say:</strong> Read one question from each card aloud and tell the audience who would ask it.
+- Marketing: "Which campaigns brought leads that became closed deals, not just meetings?"
+- Sales: "Summarise this deal's history before my call in ten minutes."
+- Customer success: "Which accounts have gone quiet in the last 60 days?"
+- Founders: "Read our closed-lost deals last quarter. What are the recurring themes?"</p>
+<p><strong>Key line:</strong> "That last kind of question used to be a quarterly review someone dreaded preparing. Now it's a question you ask on a Tuesday."</p>
+<p><strong>Transition:</strong> "Let me go deeper for the marketers in the room."</p>
+<h2>Slide 7 · For marketers (2:00)</h2>
+<p><strong>Say:</strong>
+"Thousands of sales calls are a free, unfiltered focus group. The trick is searching them by <strong>meaning</strong>, not keywords. If I search 'budget concerns', it finds 'this is too expensive' and 'I need finance to sign off'. The customer never used my words, so keyword search finds nothing. Meaning-based search finds both."</p>
+<p>Three uses, one line each:
+- <strong>Messaging:</strong> lift the buyer's own phrases into headlines, ads and landing pages.
+- <strong>Content:</strong> the questions asked most on calls are the blog posts you haven't written.
+- <strong>Competitive:</strong> see who comes up, in what context, and what tips buyers.</p>
+<p><strong>Key line:</strong> "Campaign dashboards show what people clicked. Transcripts show what they actually worried about."</p>
+<h2>Slide 8 · An account is a group of people (1:30)</h2>
+<p><strong>Say:</strong>
+"A real number from our CRM. We have 91,883 sales notes. Only 3,878 are attached to the company record. 62,515 are attached to individual people. So if you open a company record, it looks almost empty. The story is scattered across the people who work there."</p>
+<p>"For account-based teams, this is why account research takes so long. You have to follow the trail: company, then people, then every call, email and note. That legwork is exactly what the brain does for you."</p>
+<h2>Slide 9 · Closing the loop (1:30)</h2>
+<p><strong>Say:</strong>
+"Here's the loop every team claims to run: campaign, lead, conversation, won or lost, and back to the campaign. Most teams run it in a quarterly review, after the budget is already spent."</p>
+<p>"With a connected assistant, anyone can close the loop in one question: 'Why did we lose, and what should the next campaign say?' The advantage isn't a smarter model. It's that <strong>learning from the field happens in days, not quarters</strong>."</p>
+<h2>Slide 10 · For founders (1:30)</h2>
+<p><strong>Say:</strong>
+"If you're a founder thinking 'we're too small for this', you aren't. You don't need a data team. Start with three things."
+1. <strong>Two sources:</strong> your CRM and your call recordings. That already answers most of "why did we win or lose?"
+2. <strong>One weekly question:</strong> for example, "What did customers push back on this week?" Ask it every Monday.
+3. <strong>Access rules on day one:</strong> a rep doesn't need revenue figures. Easier to start strict.</p>
+<p><strong>Honest point:</strong> "We run six sources at the scale of thousands of calls, but that wasn't day one. Clean CRM habits and recorded calls matter far more than any particular tool."</p>
+<h2>Slide 11 · How the brain connects (1:30)</h2>
+<p><strong>This is the only tech slide. Keep it plain.</strong></p>
+<p><strong>Say:</strong>
+"A word on how, then I'll stop. The standard behind this is called MCP. Think of it as UPI for AI. Your UPI app never learns your bank password. It's handed a short list of things it's allowed to do. Our AI works the same way. It can use a <strong>tool</strong>. It cannot reach into the database."</p>
+<p>Walk three boxes: Claude → the connector → your systems.</p>
+<p><strong>Key line:</strong> "If we never built a tool for something, the AI simply cannot do it. That's how it reads real customer data without ever holding real access."</p>
+<h2>Slide 12 · Trust (1:30)</h2>
+<p><strong>Say:</strong> Someone is thinking "is our customer data safe?", so name it. Three rules:
+1. <strong>It can only read.</strong> It can't edit a deal, delete a contact or send an email.
+2. <strong>Only what we listed.</strong> Every table and column is named in advance. Anything not on the list is unreachable.
+3. <strong>Different people, different answers.</strong> Revenue figures are kept away from the general channel. A rep and a finance lead see different things.</p>
+<p><strong>Key line:</strong> "The rules live in the connector, so rewording the question doesn't get past them."</p>
+<p><strong>Transition:</strong> "Enough slides. Let's ask it something."</p>
+<h2>Slide 13 · Live demo (5:00)</h2>
+<p>Four questions, each reaching further than the last. <strong>Narrate which sources it picks</strong>, since it isn't told, it works it out.</p>
+<table>
+<thead>
+<tr>
+<th>Time</th>
+<th>Question</th>
+<th>What to point out</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0:45</td>
+<td>"Which deals are closing this quarter, and who owns them?"</td>
+<td>One source (CRM). The baseline.</td>
+</tr>
+<tr>
+<td>1:15</td>
+<td>"Give me all activity on this account: contacts, calls, emails and notes."</td>
+<td>It follows the trail: company, then people, then everything logged. Link back to slide 8.</td>
+</tr>
+<tr>
+<td>1:30</td>
+<td>"What did buyers say about pricing and budget in recent calls?"</td>
+<td>Searches meaning, not keywords. Link back to slide 7.</td>
+</tr>
+<tr>
+<td>1:30</td>
+<td>"Read the notes on our closed-lost deals last quarter. What are the recurring themes?"</td>
+<td>Reads and reasons across many notes. This is the founder question from slide 6.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Before you go on stage:</strong>
+- Run all four questions once beforehand and confirm you're happy with the answers.
+- Use an account you are comfortable showing publicly. Check for customer names and revenue in the output.
+- Keep a screenshot of each answer as a fallback in case the connection drops. The deck has no built-in fallback.</p>
+<p><strong>If the demo fails:</strong> "This is exactly why the working is shown. Let me tell you what it would have done." Then describe the trail in words and move on.</p>
+<h2>Slide 14 · Takeaways (1:00)</h2>
+<p>Four things, one sentence each:
+1. <strong>Give sales and marketing one brain.</strong> One place both teams can ask.
+2. <strong>Connect before you add.</strong> You rarely need another tool.
+3. <strong>Shorten the loop.</strong> Weekly learning, not quarterly.
+4. <strong>Set the rules first.</strong> Decide who sees what before the first question.</p>
+<p><strong>Closing line:</strong> "The AI was never the hard part. The hard part was getting sales and marketing to look at the same customer."</p>
+<h2>Slide 15 · Asked and answered (2:00)</h2>
+<p>Use these if the room is quiet, or skim them to pre-empt questions.
+- <strong>Do I need a data team?</strong> Not to start. The hard part is tidy CRM habits and recorded calls.
+- <strong>How do you stop it inventing numbers?</strong> It never writes free-form queries, so an invented column errors instead of returning something plausible. Every answer shows its working.
+- <strong>What does it cost?</strong> Running it is modest. The real cost is the one-off indexing of calls and emails so they can be searched by meaning.</p>
+<h2>Slide 16 · Thank you (0:30)</h2>
+<p>"Thank you. Scan either code for LinkedIn or my website, or find me after. I'd love to hear what question you'd ask your own GTM data first."</p>
+<p>Leave this slide up during Q&amp;A.</p>
+<hr />
+<h2>Likely questions from this audience</h2>
+<ul>
+<li><strong>"Which AI / tool do you use?"</strong> It's Claude, connected through MCP, an open standard. The connector doesn't depend on one model.</li>
+<li><strong>"We don't record calls. Can we still do this?"</strong> Start with the CRM and emails. Turn on call recording; that data is what unlocks the "why".</li>
+<li><strong>"Can it write our campaigns for us?"</strong> It can draft, but the value here is the research: what buyers said and which campaigns led to closed deals. Keep humans on the judgment.</li>
+<li><strong>"How long did this take you?"</strong> Be honest about the real timeline. I haven't put a number in the deck, so only say one you are sure of.</li>
+</ul>
+<h2>Things to verify before the talk</h2>
+<ul>
+<li>The stats on slides 4 and 8 (8,718 meetings, 89,955 emails, 765 collateral, 91,883 notes) came from the earlier connector deck. Confirm they are still current.</li>
+<li>Slide 10 (founder starter kit) and the "Likely questions" answers above are my suggestions. Change anything that doesn't match your experience.</li>
+<li>The event date is not in the deck yet.</li>
+</ul>
+</main>
+<a class="toplink" href="#">↑ Top</a>
+<script>document.querySelectorAll('table').forEach(t=>{const w=document.createElement('div');w.className='tablewrap';t.parentNode.insertBefore(w,t);w.appendChild(t);});</script>
+</body>
+</html>

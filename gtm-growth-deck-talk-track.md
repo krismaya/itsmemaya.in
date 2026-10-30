@@ -1,6 +1,6 @@
 # Your GTM Brain: talk track (30 minutes)
 
-**Event:** Friday Collective #37 · Chennai marketers & founders
+**Event:** Friday Collective #37 · Chennai marketers & founders  
 **Deck:** `gtm-growth-deck.html` (16 slides)
 
 ## The story in one line
