@@ -1,0 +1,1086 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ask Your Go-to-Market — AI for GTM, Marketing and Founders</title>
+
+<!-- Fonts: Midnight Blue preset (Manrope headings / DM Sans body) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+<!-- Material Symbols (fonts.google.com/icons) — icons render only after the font loads -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,0,0&display=block" rel="stylesheet">
+
+<style>
+/* ============================================
+   MIDNIGHT BLUE PRESET — LIGHT BUILD — slides-ai-plugin
+   Authoritative, data-driven. Indigo/cyan accents,
+   metric highlight boxes, gradient-mesh depth.
+
+   Semantic color coding for this deck:
+     indigo = structured data (SQL)
+     cyan   = semantic data (vectors)
+     rose   = unused since the incidents slide was cut (kept for reuse)
+   ============================================ */
+:root {
+  --bg-primary: #f4f6fc;
+  --bg-secondary: #ffffff;
+  --text-primary: #1a1f36;
+  --text-secondary: #5a6488;
+  --accent: #4f46e5;
+  --accent-secondary: #0e7490;
+  --accent-rgb: 79, 70, 229;
+  --accent2-rgb: 14, 116, 144;
+  --indigo-soft: #4338ca;
+  --cyan-soft: #0e7490;
+  --rose: #dc2626;
+  --rose-rgb: 220, 38, 38;
+  --line: rgba(26, 31, 54, 0.14);
+  --font-heading: 'Manrope', system-ui, sans-serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+  --title-size: clamp(2rem, 5.5vw, 4.4rem);
+  --h2-size: clamp(1.5rem, 3.6vw, 2.7rem);
+  --body-size: clamp(0.85rem, 1.5vw, 1.05rem);
+  --lead-size: clamp(0.95rem, 1.8vw, 1.25rem);
+  --caption-size: clamp(0.68rem, 1vw, 0.8rem);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Surfaces, hairlines and ink — named so that reskinning the deck is a palette
+     swap and nothing else. The light build overrides exactly this block. */
+  --text-strong: #0b1020;
+  --surface: rgba(255, 255, 255, 0.85);
+  --surface-solid: rgba(255, 255, 255, 0.96);
+  --surface-soft: rgba(255, 255, 255, 0.6);
+  --panel: rgba(26, 31, 54, 0.04);
+  --line-soft: rgba(26, 31, 54, 0.10);
+  --line-mid: rgba(26, 31, 54, 0.20);
+  --line-strong: rgba(26, 31, 54, 0.26);
+  --wire: rgba(26, 31, 54, 0.45);
+  --on-accent: #ffffff;
+  --indigo-deep: #4f46e5;
+  --demo-bg: #e9edfa;
+  --mesh-1: 0.09; --mesh-2: 0.07; --mesh-3: 0.05;
+  --orb-opacity: 0.3;
+}
+
+/* ============================================
+   VIEWPORT BASE (mandatory — from plugin assets)
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  overflow-x: hidden;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+.slide {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;           /* iOS Safari dynamic viewport */
+  overflow: hidden;          /* never scroll within a slide */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(1.5rem, 4vw, 4rem);
+  scroll-snap-align: start;
+  isolation: isolate;
+}
+
+/* Gradient mesh — the Midnight Blue atmospheric recipe.
+   Ellipse positions alternate per slide for quiet variety. */
+.slide {
+  background:
+    radial-gradient(ellipse at 18% 40%, rgba(var(--accent-rgb), var(--mesh-1)) 0%, transparent 52%),
+    radial-gradient(ellipse at 85% 12%, rgba(var(--accent2-rgb), var(--mesh-2)) 0%, transparent 50%),
+    radial-gradient(ellipse at 55% 95%, rgba(var(--accent-rgb), var(--mesh-3)) 0%, transparent 50%),
+    var(--bg-primary);
+}
+.slide:nth-child(even) {
+  background:
+    radial-gradient(ellipse at 82% 45%, rgba(var(--accent-rgb), var(--mesh-1)) 0%, transparent 52%),
+    radial-gradient(ellipse at 12% 90%, rgba(var(--accent2-rgb), var(--mesh-2)) 0%, transparent 50%),
+    var(--bg-primary);
+}
+/* demo slide — darker, cyan-charged for the big moment */
+.slide[data-theme="demo"] {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(var(--accent2-rgb), 0.16) 0%, transparent 55%),
+    radial-gradient(ellipse at 15% 90%, rgba(var(--accent-rgb), 0.14) 0%, transparent 50%),
+    var(--demo-bg);
+}
+/* incidents slide — a low rose wash under the mesh */
+.slide[data-theme="hot"] {
+  background:
+    radial-gradient(ellipse at 20% 20%, rgba(var(--rose-rgb), 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse at 85% 85%, rgba(var(--accent-rgb), 0.10) 0%, transparent 50%),
+    var(--bg-primary);
+}
+
+/* subtle noise for texture over the mesh */
+.slide::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 1;
+}
+
+.slide-content {
+  width: 100%;
+  max-width: min(90vw, 1200px);
+  max-height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.7rem, 1.8vh, 1.3rem);
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+.slide-title {
+  font-family: var(--font-heading);
+  font-size: var(--h2-size);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+h1.slide-title { font-size: var(--title-size); line-height: 1.04; letter-spacing: -0.025em; }
+
+/* breathing room: ~10px extra separation on top of the flex gap,
+   between title → description → cards/content */
+.slide-content > .slide-title { margin-bottom: clamp(0.55rem, 1.5vh, 0.9rem); }
+.slide-content > .lead { margin-bottom: clamp(0.55rem, 1.5vh, 0.9rem); }
+.slide-content > .kicker { margin-bottom: clamp(0.1rem, 0.5vh, 0.3rem); }
+
+/* indigo→cyan gradient — the deck's signature emphasis */
+.grad {
+  background: linear-gradient(92deg, var(--indigo-soft) 0%, var(--accent-secondary) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.kicker {
+  font-family: var(--font-heading);
+  font-size: var(--caption-size);
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+}
+
+/* ============================================
+   MATERIAL SYMBOLS — hidden until the font is
+   confirmed loaded (offline → clean text, no
+   raw ligature words). Colors follow the data
+   key: cyan default · indigo = SQL · rose = hot.
+   ============================================ */
+.msr {
+  font-family: 'Material Symbols Rounded';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1.2em;
+  line-height: 1;
+  display: none;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  direction: ltr;
+  font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  color: var(--accent-secondary);
+  flex: none;
+}
+body.icons-ready .msr { display: inline-block; }
+.metric .k, .node .t, .qa .cat { display: flex; align-items: center; gap: 0.45rem; }
+.card h3 { display: flex; align-items: flex-start; gap: 0.5rem; }
+.card h3 .msr { margin-top: 0.06em; }
+.metric.sql .msr, .node.sqln .msr { color: var(--indigo-soft); }
+.card.hot .msr { color: var(--rose); }
+.shot .msr { font-size: 2rem; color: var(--text-secondary); }
+
+.lead {
+  font-size: var(--lead-size);
+  line-height: 1.55;
+  color: var(--text-primary);
+  max-width: 62ch;
+}
+.lead b, li b, .a b { font-weight: 700; color: var(--text-strong); }
+.dim { color: var(--text-secondary); }
+
+.slide-caption {
+  font-size: var(--caption-size);
+  color: var(--text-secondary);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.punch {
+  font-family: var(--font-heading);
+  font-size: clamp(1.2rem, 2.6vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+}
+
+/* ============================================
+   METRIC HIGHLIGHT BOXES — preset signature
+   ============================================ */
+.metrics { display: grid; gap: clamp(0.6rem, 1.4vw, 1rem); width: 100%; }
+.m3 { grid-template-columns: repeat(3, 1fr); }
+.m4 { grid-template-columns: repeat(4, 1fr); }
+
+.metric {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(0.8rem, 1.8vw, 1.3rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  min-width: 0;
+  backdrop-filter: blur(4px);
+}
+.metric .k {
+  font-size: var(--caption-size);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.metric .v {
+  font-family: var(--font-heading);
+  font-size: clamp(1.5rem, 3.2vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  color: var(--text-strong);
+  font-variant-numeric: tabular-nums;
+}
+.metric .d { font-size: clamp(0.72rem, 1.1vw, 0.86rem); color: var(--text-secondary); line-height: 1.4; }
+
+/* data-plane keying: indigo = SQL · cyan = vectors · rose = unused (incidents slide cut) */
+.metric.sql, .card.sql { border-top: 2px solid var(--accent); }
+.metric.sql .v { color: var(--indigo-soft); }
+.metric.vec, .card.vec { border-top: 2px solid var(--accent-secondary); }
+.metric.vec .v { color: var(--cyan-soft); }
+.metric.glow { box-shadow: 0 0 32px rgba(var(--accent-rgb), 0.14); }
+
+/* ============================================
+   DATA CARDS
+   ============================================ */
+.cards { display: grid; gap: clamp(0.6rem, 1.4vw, 1rem); width: 100%; }
+.c2 { grid-template-columns: repeat(2, 1fr); }
+.c3 { grid-template-columns: repeat(3, 1fr); }
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(0.85rem, 1.8vw, 1.25rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  min-width: 0;
+}
+.card h3 {
+  font-family: var(--font-heading);
+  font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--text-strong);
+}
+.card p, .card li { font-size: clamp(0.78rem, 1.15vw, 0.92rem); color: var(--text-secondary); line-height: 1.5; }
+.card ul { padding-left: 1.05rem; display: flex; flex-direction: column; gap: 0.35rem; }
+.card li::marker { color: var(--accent-secondary); }
+.card.hot { border-top: 2px solid var(--rose); }
+.card.hot h3 { color: var(--rose); }
+
+/* tag pills */
+.tag {
+  display: inline-flex;
+  width: max-content;
+  align-items: center;
+  font-size: var(--caption-size);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 0.22em 0.75em;
+  border-radius: 999px;
+}
+.tag.sql { background: rgba(var(--accent-rgb), 0.16); color: var(--indigo-soft); }
+.tag.vec { background: rgba(var(--accent2-rgb), 0.13); color: var(--cyan-soft); }
+.tag.live {
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+  color: var(--on-accent);
+  font-weight: 800;
+}
+
+/* ============================================
+   QUESTION CARDS
+   ============================================ */
+.qcard {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 14px 14px 0;
+  padding: clamp(0.7rem, 1.5vw, 1.05rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.32rem;
+  min-width: 0;
+}
+.qcard q { font-size: clamp(0.82rem, 1.25vw, 0.98rem); font-weight: 500; color: var(--text-strong); line-height: 1.42; quotes: '"' '"'; }
+.qcard .src {
+  font-size: var(--caption-size);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+}
+.qcard .n {
+  font-family: var(--font-heading);
+  font-size: var(--caption-size);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--indigo-soft);
+}
+
+/* Q&A tiles */
+.qa { border-left: 3px solid var(--accent-secondary); }
+.qa .cat {
+  font-size: var(--caption-size); font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--accent-secondary);
+}
+.qa .q { font-family: var(--font-heading); font-size: clamp(0.88rem, 1.35vw, 1.02rem); font-weight: 700; color: var(--text-strong); line-height: 1.35; }
+.qa .a { font-size: clamp(0.76rem, 1.12vw, 0.9rem); color: var(--text-secondary); line-height: 1.5; }
+
+/* ============================================
+   FLOW PIPELINE
+   ============================================ */
+.flow { display: flex; flex-wrap: wrap; align-items: stretch; gap: clamp(0.4rem, 1vw, 0.8rem); width: 100%; }
+.node {
+  flex: 1 1 10rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(0.7rem, 1.5vw, 1rem) clamp(0.8rem, 1.6vw, 1.1rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+.node .t { font-family: var(--font-heading); font-weight: 700; font-size: clamp(0.85rem, 1.3vw, 1rem); color: var(--text-strong); }
+.node .d { font-size: clamp(0.7rem, 1.05vw, 0.82rem); color: var(--text-secondary); }
+.node.sqln { border-top: 2px solid var(--accent); }
+.node.vecn { border-top: 2px solid var(--accent-secondary); }
+.conn {
+  align-self: center;
+  color: var(--accent-secondary);
+  font-family: var(--font-heading);
+  font-weight: 800;
+  font-size: clamp(0.9rem, 1.6vw, 1.25rem);
+}
+
+/* ============================================
+   WHY-IT-MATTERS CALLOUT
+   ============================================ */
+.why {
+  border-left: 3px solid var(--accent-secondary);
+  padding-left: clamp(0.7rem, 1.5vw, 1rem);
+  font-size: clamp(0.78rem, 1.18vw, 0.94rem);
+  color: var(--text-secondary);
+  max-width: 66ch;
+  line-height: 1.5;
+}
+.why b {
+  display: block;
+  font-size: var(--caption-size);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-secondary);
+  margin-bottom: 0.18rem;
+}
+.why strong { color: var(--text-primary); font-weight: 700; }
+
+/* ============================================
+   BAR CHARTS — gradient fills, direct labels
+   ============================================ */
+.viz { display: flex; flex-direction: column; gap: 0.45rem; width: 100%; min-width: 0; }
+.viz .vt {
+  font-size: var(--caption-size); font-weight: 700; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--text-secondary);
+}
+.rows { display: flex; flex-direction: column; gap: 0.34rem; }
+.r { display: grid; grid-template-columns: 8.5rem 1fr auto; align-items: center; gap: 0.8rem; }
+.r .lbl { font-size: clamp(0.76rem, 1.15vw, 0.92rem); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.track { height: 0.72rem; background: var(--line-soft); border-radius: 999px; overflow: hidden; }
+.fill {
+  height: 100%; display: block; min-width: 4px; border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent), var(--accent-secondary));
+}
+.viz.mono .fill { background: linear-gradient(90deg, var(--indigo-deep), var(--indigo-soft)); }
+.r .val {
+  font-family: var(--font-heading); font-weight: 700;
+  font-size: clamp(0.76rem, 1.15vw, 0.92rem);
+  font-variant-numeric: tabular-nums; min-width: 4.4rem; text-align: right; color: var(--text-strong);
+}
+
+/* ============================================
+   ARCHITECTURE DIAGRAM
+   ============================================ */
+.diagram { width: 100%; height: auto; max-height: 50vh; overflow: visible; }
+.diagram .box { fill: var(--surface-solid); stroke: var(--line-mid); stroke-width: 1; }
+.diagram .box.hub { stroke: var(--accent); stroke-width: 1.6; }
+.diagram .box.sqlb { stroke: var(--accent); stroke-width: 1.4; }
+.diagram .box.vecb { stroke: var(--accent-secondary); stroke-width: 1.4; }
+/* marching-ants data flow: dashes travel left→right along each wire
+   (paths are drawn left→right, so a negative dashoffset moves forward) */
+.diagram .wire {
+  stroke: var(--wire); stroke-width: 1.5; fill: none;
+  stroke-dasharray: 7 6;
+  stroke-linecap: round;
+  animation: ants 0.8s linear infinite;
+}
+.diagram .wire.live { stroke: var(--accent-secondary); }
+@keyframes ants { to { stroke-dashoffset: -13; } }
+@media (prefers-reduced-motion: reduce) {
+  .diagram .wire { animation: none; }
+}
+.diagram .t1 { fill: var(--text-strong); font-size: 13px; font-weight: 700; font-family: var(--font-heading); }
+.diagram .t2 { fill: var(--text-secondary); font-size: 10.5px; font-family: var(--font-body); }
+.diagram .cap { fill: var(--accent-secondary); font-size: 9.5px; letter-spacing: 0.14em;
+                font-family: var(--font-heading); font-weight: 700; text-transform: uppercase; }
+.diagram .cap2 { fill: var(--text-secondary); font-size: 9.5px; letter-spacing: 0.12em;
+                 font-family: var(--font-heading); text-transform: uppercase; }
+
+/* ============================================
+   SCREENSHOT SLOTS — unused since the captured-demo slide was cut.
+   Kept so screenshots can be dropped back in: <img class="shot" src="..." alt="...">
+   ============================================ */
+.shots { max-width: min(88vw, 62rem); margin-inline: auto; }
+.shot {
+  border: 1px dashed var(--line-strong);
+  border-radius: 14px;
+  background: var(--surface-soft);
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  text-align: center;
+  padding: 0.8rem;
+  object-fit: cover;
+}
+.shot .cap { font-family: var(--font-heading); font-weight: 700; font-size: clamp(0.8rem, 1.2vw, 0.95rem); color: var(--text-strong); }
+.shot .hint { font-size: var(--caption-size); letter-spacing: 0.12em; text-transform: uppercase; color: var(--text-secondary); }
+
+/* ============================================
+   TITLE SLIDE EXTRAS
+   ============================================ */
+.meta-row { display: flex; flex-wrap: wrap; gap: 0.5rem 2.8rem; }
+.meta-row div { display: flex; flex-direction: column; gap: 0.12rem; }
+.meta-row .mk {
+  font-size: var(--caption-size); font-weight: 700; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--text-secondary);
+}
+.meta-row .mv { font-size: clamp(0.82rem, 1.25vw, 0.98rem); font-weight: 500; color: var(--text-primary); }
+.hair { border: 0; height: 1px; width: 100%; background: linear-gradient(90deg, var(--line), transparent); }
+
+/* floating gradient orbs (GSAP drifts them; static without JS) */
+.orb {
+  position: fixed; border-radius: 50%; filter: blur(90px);
+  pointer-events: none; z-index: 0; opacity: var(--orb-opacity);
+}
+.orb.o1 { width: 34vw; height: 34vw; background: rgba(var(--accent-rgb), 0.24); top: -12vw; left: -10vw; }
+.orb.o2 { width: 28vw; height: 28vw; background: rgba(var(--accent2-rgb), 0.16); bottom: -10vw; right: -8vw; }
+
+/* ============================================
+   ANIMATIONS BASE — CSS-first, GSAP enhances
+   ============================================ */
+.reveal { opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo); }
+.reveal-scale { opacity: 0; transform: scale(0.95);
+  transition: opacity 0.6s var(--ease-out-expo), transform 0.6s var(--ease-out-expo); }
+.reveal.visible, .reveal-scale.visible { opacity: 1; transform: none; }
+
+/* ============================================
+   RESPONSIVE BREAKPOINTS
+   ============================================ */
+@media (max-height: 700px) {
+  .slide { padding: clamp(1rem, 2vw, 2rem); }
+  :root { --h2-size: clamp(1.3rem, 3.2vw, 2.1rem); --lead-size: clamp(0.85rem, 1.5vw, 1.05rem); }
+  .metric .d { display: none; }
+  .slide-content > .slide-title,
+  .slide-content > .lead { margin-bottom: 0.25rem; }
+}
+@media (max-height: 600px) {
+  .nav, .why, .metric .d, .idx { display: none; }
+  :root { --title-size: clamp(1.6rem, 5vw, 2.8rem); }
+}
+@media (max-height: 500px) {
+  .slide { padding: 0.75rem; }
+  .lead { display: none; }
+}
+@media (max-width: 960px) {
+  .c3, .m4 { grid-template-columns: repeat(2, 1fr); }
+  .m3 { grid-template-columns: repeat(3, 1fr); }
+  .diagram { max-height: 38vh; }
+}
+@media (max-width: 640px) {
+  .c2, .c3 { grid-template-columns: 1fr; }
+  .m3, .m4 { grid-template-columns: repeat(2, 1fr); }
+  .cards.qgrid { grid-template-columns: repeat(2, 1fr); }
+  .metric .d, .qcard .src, .node .d, .why { display: none; }
+  .r { grid-template-columns: 5.5rem 1fr auto; }
+  .nav { display: none; }
+}
+
+/* ============================================
+   REDUCED MOTION
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-scale { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* ============================================
+   PRINT / PDF EXPORT
+   ============================================ */
+@media print {
+  .slide { page-break-after: always; height: 100vh; overflow: hidden; }
+  .orb { display: none; }
+  .reveal, .reveal-scale { opacity: 1; transform: none; }
+}
+
+:focus-visible { outline: 2px solid var(--accent-secondary); outline-offset: 3px; }
+
+/* ---- thank-you slide ---------------------------------------------- */
+.thanks-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(15rem,1fr));
+  gap:1.25rem;width:100%;margin-top:.5rem}
+.contact{display:flex;flex-direction:column;align-items:center;gap:.85rem;
+  padding:1.5rem 1.25rem;border-radius:16px;text-align:center;
+  background:var(--panel);border:1px solid var(--line)}
+.contact .qr{width:min(11rem,42vw);height:auto;color:currentColor;
+  background:#fff;padding:.6rem;border-radius:10px}
+.contact .who{font-weight:700;font-size:1.05rem;letter-spacing:-.01em}
+.contact .where{font-family:var(--mono,ui-monospace,monospace);font-size:.82rem;opacity:.72;
+  word-break:break-all}
+.contact .msr{font-size:1.35rem;opacity:.85}
+@media (max-width:640px){.contact{padding:1.15rem}}
+</style>
+</head>
+<body>
+
+<div class="orb o1" aria-hidden="true"></div>
+<div class="orb o2" aria-hidden="true"></div>
+
+<!-- ============ SLIDE 1 · TITLE ============
+     notes: Open with the room, not the tech. Ask for a show of hands:
+     "Who has spent an hour finding out why a deal was lost?" -->
+<section class="slide" id="slide-1">
+  <div class="slide-content">
+    <p class="kicker reveal">For GTM · Marketing · Founders</p>
+    <h1 class="slide-title reveal">Your go-to-market already knows the answer.<br>
+    <span class="grad">Now you can just ask it.</span></h1>
+    <hr class="hair reveal">
+    <div class="meta-row reveal">
+      <div><span class="mk">Speaker</span><span class="mv">Mayakrishnan R.</span></div>
+      <div><span class="mk">Role</span><span class="mv">Technical Manager, RevOps @ Kissflow</span></div>
+      <div><span class="mk">Audience</span><span class="mv">GTM teams · Marketers · SMB founders</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 2 · THE FAMILIAR PROBLEM ============
+     notes: Everyone nods here. Let "nobody asks" land before moving on. -->
+<section class="slide" id="slide-2">
+  <div class="slide-content">
+    <p class="kicker reveal">01 — The problem you already know</p>
+    <h2 class="slide-title reveal">The answer exists. It's just<br><span class="grad">scattered across six systems.</span></h2>
+    <p class="lead reveal dim">A founder asks a simple question: "why did we lose that deal?" To answer it honestly
+    someone opens the CRM, the billing tool, a usage report, then hunts for the call recording
+    and searches the inbox. That's about an hour. So most of the time, nobody asks.</p>
+    <div class="metrics m3 reveal">
+      <div class="metric"><span class="k"><span class="msr" aria-hidden="true">apps</span>Different systems</span><span class="v">6</span>
+        <span class="d">each with its own login, its own search, its own idea of "customer"</span></div>
+      <div class="metric"><span class="k"><span class="msr" aria-hidden="true">description</span>Formats</span><span class="v">7+</span>
+        <span class="d">tables, transcripts, email threads, slides, PDFs, video, spreadsheets</span></div>
+      <div class="metric"><span class="k"><span class="msr" aria-hidden="true">schedule</span>Realistic answer time</span><span class="v">~1hr</span>
+        <span class="d">so the question quietly stops being asked</span></div>
+    </div>
+    <p class="punch reveal">The data isn't missing. <span class="grad">It's unreachable.</span></p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 3 · EVERYONE SEES A SLICE ============
+     notes: This is the marketing-vs-sales argument in one picture. -->
+<section class="slide" id="slide-3">
+  <div class="slide-content">
+    <p class="kicker reveal">02 — Why teams talk past each other</p>
+    <h2 class="slide-title reveal">Everyone sees a slice.<br><span class="grad">Nobody sees the customer.</span></h2>
+    <div class="cards c2 reveal">
+      <div class="card"><h3><span class="msr" aria-hidden="true">campaign</span>Marketing sees</h3>
+        <p>Clicks, form fills, MQLs, pipeline sourced. It knows <b>who showed up</b>, not what happened on the call.</p></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">handshake</span>Sales sees</h3>
+        <p>Deals, stages, objections, close dates. It knows <b>why a deal stalled</b>, but it lives in notes nobody reads.</p></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">support_agent</span>Customer success sees</h3>
+        <p>Usage, renewals, complaints. It knows <b>who is quietly drifting away</b> long before the renewal date.</p></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">account_balance_wallet</span>Founders see</h3>
+        <p>Revenue and a board deck. A tidy summary of a story <b>they never got to read</b>.</p></div>
+    </div>
+    <p class="why reveal"><b>Why it matters</b>"Marketing leads are weak" and "sales doesn't follow up" are often
+    the same disagreement, argued from two partial views. The fix isn't another meeting. It's
+    <strong>one place where everybody can ask the same question</strong>.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 4 · TWO KINDS OF DATA ============
+     notes: Numbers tell you WHAT. Conversations tell you WHY. Both matter. -->
+<section class="slide" id="slide-4">
+  <div class="slide-content">
+    <p class="kicker reveal">03 — What your GTM data really is</p>
+    <h2 class="slide-title reveal">Numbers tell you <span class="grad">what</span>.<br>Conversations tell you <span class="grad">why</span>.</h2>
+    <div class="metrics m3 reveal">
+      <div class="metric sql"><span class="k"><span class="msr" aria-hidden="true">database</span>CRM</span><span class="v">Deals</span>
+        <span class="d">Contacts, companies, pipeline, owners. The system of record.</span></div>
+      <div class="metric sql"><span class="k"><span class="msr" aria-hidden="true">receipt_long</span>Billing</span><span class="v">Revenue</span>
+        <span class="d">Subscriptions, renewals, churn. The commercial reality.</span></div>
+      <div class="metric sql"><span class="k"><span class="msr" aria-hidden="true">monitoring</span>Product usage</span><span class="v">Adoption</span>
+        <span class="d">Who is active, who isn't. What they actually do.</span></div>
+      <div class="metric vec"><span class="k"><span class="msr" aria-hidden="true">graphic_eq</span>Sales calls</span><span class="v">8,718</span>
+        <span class="d">Meetings across Meet, Teams, Zoom and Webex.</span></div>
+      <div class="metric vec"><span class="k"><span class="msr" aria-hidden="true">mail</span>Emails</span><span class="v">89,955</span>
+        <span class="d">Every email logged against a customer.</span></div>
+      <div class="metric vec"><span class="k"><span class="msr" aria-hidden="true">slideshow</span>Sales collateral</span><span class="v">765</span>
+        <span class="d">Decks, PDFs and case studies, tagged by region.</span></div>
+    </div>
+    <p class="why reveal"><b>Why it matters</b>The <strong>indigo</strong> ones are neat tables: ask for "every deal over
+    $50,000" and get an exact answer. The <strong>cyan</strong> ones are what people said and wrote,
+    and they hold the reasons. Most tools handle one kind. The useful questions need both:
+    "which customers pay us the most, and what were they unhappy about last month?"</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 5 · THE IDEA (UPI) ============
+     notes: Keep the UPI story short. The point: nothing moved, it just became reachable. -->
+<section class="slide" id="slide-5">
+  <div class="slide-content">
+    <p class="kicker reveal">04 — The idea</p>
+    <h2 class="slide-title reveal">One question. <span class="grad">Every source.</span></h2>
+    <p class="lead reveal dim">Before UPI, your money wasn't missing. It was just hard to reach: six banks, six
+    apps, six logins. UPI didn't pool anyone's money. It put <b>one interface over every bank</b>.
+    This is the same move for your go-to-market data. Nothing gets copied into a giant new
+    tool. You type an ordinary sentence and it goes and gets the answer.</p>
+    <div class="flow reveal">
+      <div class="node"><span class="t"><span class="msr" aria-hidden="true">forum</span>You ask</span><span class="d">plain English · no query language</span></div>
+      <span class="conn">→</span>
+      <div class="node"><span class="t"><span class="msr" aria-hidden="true">route</span>It plans</span><span class="d">picks the systems · picks the order</span></div>
+      <span class="conn">→</span>
+      <div class="node sqln"><span class="t"><span class="msr" aria-hidden="true">manage_search</span>It looks</span><span class="d">numbers and conversations · read-only</span></div>
+      <span class="conn">→</span>
+      <div class="node vecn"><span class="t"><span class="msr" aria-hidden="true">fact_check</span>It answers</span><span class="d">with the working shown</span></div>
+    </div>
+    <p class="why reveal"><b>Why it matters</b>There is nothing new to learn. The question <em>is</em> the interface.
+    A founder, a marketer and a rep can type the same sentence and each get a useful answer.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 6 · WHAT EACH ROLE ASKS ============ -->
+<section class="slide" id="slide-6">
+  <div class="slide-content">
+    <p class="kicker reveal">05 — In practice</p>
+    <h2 class="slide-title reveal">Same data. <span class="grad">Different question for every role.</span></h2>
+    <div class="cards c2 reveal">
+      <div class="card"><h3><span class="msr" aria-hidden="true">campaign</span>Marketing</h3>
+        <ul>
+          <li>"What words do buyers use to describe the problem we solve?"</li>
+          <li>"Which objections come up most in calls this quarter?"</li>
+        </ul></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">handshake</span>Sales</h3>
+        <ul>
+          <li>"Summarise this deal's history before my call in ten minutes."</li>
+          <li>"Who at this company have we never met, and who owns them?"</li>
+        </ul></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">support_agent</span>Customer success</h3>
+        <ul>
+          <li>"Which accounts have gone quiet in the last 60 days?"</li>
+          <li>"What did this customer say about renewal in recent calls?"</li>
+        </ul></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">trending_up</span>Founders</h3>
+        <ul>
+          <li>"Read our closed-lost deals last quarter. What are the recurring themes?"</li>
+          <li>"Which accounts have high engagement but no active deal?"</li>
+        </ul></div>
+    </div>
+    <p class="why reveal"><b>Why it matters</b>The last one used to be a quarterly review someone dreaded preparing.
+    Now it is a question you can ask on a Tuesday.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 7 · VOICE OF CUSTOMER (MARKETING) ============
+     notes: This is the slide for the marketers. Buyers never use our category words. -->
+<section class="slide" id="slide-7">
+  <div class="slide-content">
+    <p class="kicker reveal">06 — For marketers</p>
+    <h2 class="slide-title reveal">Stop guessing your messaging. <span class="grad">Read what buyers said.</span></h2>
+    <p class="lead reveal dim">Thousands of sales calls are a free, unfiltered focus group. Search them by
+    <b>meaning</b>, not keywords. Search "budget concerns" and it finds "this is too expensive" and "I need
+    finance to sign off", words the customer actually used.</p>
+    <div class="cards c3 reveal">
+      <div class="card vec"><h3><span class="msr" aria-hidden="true">edit_note</span>Messaging</h3>
+        <p>Lift the buyer's own phrases into headlines, ads and landing pages instead of ours.</p></div>
+      <div class="card vec"><h3><span class="msr" aria-hidden="true">article</span>Content</h3>
+        <p>The questions asked most on calls are the blog posts and FAQs you haven't written yet.</p></div>
+      <div class="card vec"><h3><span class="msr" aria-hidden="true">compare_arrows</span>Competitive</h3>
+        <p>See who comes up, in what context, and what makes buyers lean one way or the other.</p></div>
+    </div>
+    <p class="why reveal"><b>Why it matters</b>Campaign dashboards show what people clicked. Call transcripts show what
+    they <strong>actually worried about</strong>. Your next campaign angle is probably already in last month's calls.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 8 · ACCOUNTS ARE PEOPLE (ABM) ============
+     notes: Real numbers from our CRM. The story lives on the people, not the company record. -->
+<section class="slide" id="slide-8">
+  <div class="slide-content">
+    <p class="kicker reveal">07 — For account-based teams</p>
+    <h2 class="slide-title reveal">An account is really <span class="grad">a group of people</span></h2>
+    <p class="lead reveal dim">Open a company record and it looks nearly empty. The history is scattered across the
+    individual people who work there. Following that trail by hand is why account research takes so long.</p>
+    <div class="viz mono reveal" aria-label="Sales notes by the object they are attached to">
+      <span class="vt">Our sales notes by what they are attached to · 91,883 total</span>
+      <div class="rows">
+        <div class="r"><span class="lbl">Contacts</span><span class="track"><span class="fill" data-w="100%"></span></span><span class="val">62,515</span></div>
+        <div class="r"><span class="lbl">Deals</span><span class="track"><span class="fill" data-w="23.6%"></span></span><span class="val">14,767</span></div>
+        <div class="r"><span class="lbl">Customers</span><span class="track"><span class="fill" data-w="17.2%"></span></span><span class="val">10,723</span></div>
+        <div class="r"><span class="lbl">Companies</span><span class="track"><span class="fill" data-w="6.2%"></span></span><span class="val">3,878</span></div>
+      </div>
+    </div>
+    <p class="why reveal"><b>Why it matters</b>Only 3,878 notes sit on the company itself, against 62,515 on its people.
+    Asking about an account means <strong>following the trail</strong> from company to people to every
+    call, email and note. That is exactly the legwork the assistant does for you.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 9 · THE LOOP ============
+     notes: The loop most teams run once a quarter. Make it continuous. -->
+<section class="slide" id="slide-9">
+  <div class="slide-content">
+    <p class="kicker reveal">08 — Closing the loop</p>
+    <h2 class="slide-title reveal">Sales and marketing finally share <span class="grad">one feedback loop</span></h2>
+    <div class="flow reveal">
+      <div class="node"><span class="t"><span class="msr" aria-hidden="true">campaign</span>Campaign</span><span class="d">what we said</span></div>
+      <span class="conn">→</span>
+      <div class="node"><span class="t"><span class="msr" aria-hidden="true">person_search</span>Lead</span><span class="d">who responded</span></div>
+      <span class="conn">→</span>
+      <div class="node vecn"><span class="t"><span class="msr" aria-hidden="true">graphic_eq</span>Conversation</span><span class="d">what they asked</span></div>
+      <span class="conn">→</span>
+      <div class="node sqln"><span class="t"><span class="msr" aria-hidden="true">paid</span>Won or lost</span><span class="d">what happened</span></div>
+      <span class="conn">→</span>
+      <div class="node"><span class="t"><span class="msr" aria-hidden="true">replay</span>Back to campaign</span><span class="d">what to change</span></div>
+    </div>
+    <div class="cards c2 reveal">
+      <div class="card"><h3><span class="msr" aria-hidden="true">hourglass_bottom</span>Today</h3>
+        <p>The loop runs in a quarterly review. Insight arrives after the budget has already been spent.</p></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">bolt</span>With a connected assistant</h3>
+        <p>Anyone can close the loop in one question: "why did we lose, and what should the next campaign say?"</p></div>
+    </div>
+    <p class="why reveal"><b>Why it matters</b>The advantage isn't a smarter model. It is that
+    <strong>learning from the field happens in days, not quarters</strong>.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 10 · FOUNDER STARTER KIT ============
+     notes: For the SMB founders: you do not need our scale to start. Keep it small. -->
+<section class="slide" id="slide-10">
+  <div class="slide-content">
+    <p class="kicker reveal">09 — For founders</p>
+    <h2 class="slide-title reveal">You don't need a data team. <span class="grad">Start with three things.</span></h2>
+    <div class="cards c3 reveal">
+      <div class="card"><h3><span class="msr" aria-hidden="true">looks_one</span>Pick two sources</h3>
+        <p>Your CRM and your call recordings. Two sources already answer most of "why did we win or lose?"</p></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">looks_two</span>Pick one weekly question</h3>
+        <p>"What did customers push back on this week?" Ask it every Monday and watch the pattern build.</p></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">looks_3</span>Decide who sees what</h3>
+        <p>Set access rules on day one. A rep doesn't need revenue figures. Easier to start strict.</p></div>
+    </div>
+    <p class="why reveal"><b>Why it matters</b>We run six sources at the scale of thousands of calls, but
+    that wasn't day one. <strong>Clean CRM habits and recorded calls</strong> are what actually make this work,
+    far more than any particular tool.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 11 · HOW IT WORKS (LIGHT TECH) ============
+     notes: The only "tech" slide. Three boxes. If asked, name MCP, then move on. -->
+<section class="slide" id="slide-11">
+  <div class="slide-content">
+    <p class="kicker reveal">10 — How it connects</p>
+    <h2 class="slide-title reveal">The assistant gets <span class="grad">tools, not keys</span></h2>
+    <p class="lead reveal dim">The standard behind this is called MCP, think "UPI for AI". Your UPI app never learns
+    your bank password. It is handed a short list of things it may do. The assistant works the
+    same way: it can use a tool, it cannot reach into your systems.</p>
+    <div class="flow reveal">
+      <div class="node"><span class="t"><span class="msr" aria-hidden="true">smart_toy</span>Claude</span><span class="d">asks in English</span></div>
+      <span class="conn">→</span>
+      <div class="node sqln"><span class="t"><span class="msr" aria-hidden="true">hub</span>The connector</span><span class="d">a short list of named tools</span></div>
+      <span class="conn">→</span>
+      <div class="node"><span class="t"><span class="msr" aria-hidden="true">dns</span>Your systems</span><span class="d">read-only · checked</span></div>
+    </div>
+    <p class="why reveal"><b>Why it matters</b>If a tool was never built for something, the assistant simply cannot do it.
+    That is how it reads real customer data <strong>without ever holding real access</strong> to the database.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 12 · TRUST ============ -->
+<section class="slide" id="slide-12">
+  <div class="slide-content">
+    <p class="kicker reveal">11 — Trust</p>
+    <h2 class="slide-title reveal">"Is our customer data safe?" <span class="grad">The three rules.</span></h2>
+    <div class="cards c3 reveal">
+      <div class="card sql"><h3><span class="msr" aria-hidden="true">visibility</span>It can only read</h3>
+        <p>A read-only login. It cannot edit a deal, delete a contact or send an email on anyone's behalf.</p></div>
+      <div class="card sql"><h3><span class="msr" aria-hidden="true">list_alt</span>Only what we listed</h3>
+        <p>Every table and column is named in advance. Anything not on the list is unreachable.</p></div>
+      <div class="card sql"><h3><span class="msr" aria-hidden="true">filter_alt</span>Different people, different answers</h3>
+        <p>Revenue figures are kept away from the general channel. A rep and a finance lead see different things.</p></div>
+    </div>
+    <p class="why reveal"><b>Why it matters</b>Two people can ask the same question and correctly get different
+    answers. The rules live in the connector, so <strong>rewording the question doesn't get past them</strong>.</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 13 · LIVE DEMO ============
+     notes: The centerpiece. Run these live. Narrate which sources it chooses. -->
+<section class="slide" data-theme="demo" id="slide-13">
+  <div class="slide-content">
+    <span class="tag live reveal">● Live demo</span>
+    <h2 class="slide-title reveal">Let's <span class="grad">ask it something</span></h2>
+    <p class="lead reveal dim">Four questions, each reaching further than the last. Watch which
+    sources it decides to touch. It isn't told, it works it out.</p>
+    <div class="cards c2 qgrid reveal">
+      <div class="qcard"><span class="n">01 · one source</span>
+        <q>Which deals are closing this quarter, and who owns them?</q>
+        <span class="src">CRM only · the baseline</span></div>
+      <div class="qcard"><span class="n">02 · follows the trail</span>
+        <q>Give me all activity on this account: contacts, calls, emails and notes.</q>
+        <span class="src">company → people → everything logged</span></div>
+      <div class="qcard"><span class="n">03 · searches meaning</span>
+        <q>What did buyers say about pricing and budget in recent calls?</q>
+        <span class="src">transcripts · matched on meaning, not keywords</span></div>
+      <div class="qcard"><span class="n">04 · reads and reasons</span>
+        <q>Read the notes on our closed-lost deals last quarter. What are the recurring themes?</q>
+        <span class="src">notes across every deal · summarised</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 14 · TAKEAWAYS ============ -->
+<section class="slide" id="slide-14">
+  <div class="slide-content">
+    <p class="kicker reveal">12 — Takeaways</p>
+    <h2 class="slide-title reveal">Four things worth <span class="grad">taking home</span></h2>
+    <div class="cards c2 reveal">
+      <div class="card"><h3><span class="msr" aria-hidden="true">forum</span>Your calls are your best research</h3>
+        <p>Thousands of conversations already hold your messaging, objections and competitors. Start reading them.</p></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">hub</span>Connect before you add</h3>
+        <p>You rarely need another tool. The questions worth asking cross the ones you already own.</p></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">loop</span>Shorten the loop</h3>
+        <p>Make learning from sales calls weekly, not quarterly. That is where the real advantage sits.</p></div>
+      <div class="card"><h3><span class="msr" aria-hidden="true">security</span>Set the rules first</h3>
+        <p>Decide who sees what before the first question is asked. It is much harder to add later.</p></div>
+    </div>
+    <p class="slide-caption reveal">Questions · GTM · Marketing · Founders</p>
+  </div>
+</section>
+
+<!-- ============ SLIDE 15 · Q&A ============ -->
+<section class="slide" id="slide-15">
+  <div class="slide-content">
+    <p class="kicker reveal">13 — The questions we always get</p>
+    <h2 class="slide-title reveal">Asked and <span class="grad">answered</span></h2>
+    <div class="cards c3 reveal">
+      <div class="card qa"><span class="cat"><span class="msr" aria-hidden="true">engineering</span>Getting started</span>
+        <p class="q">Do I need a data team to do this?</p>
+        <p class="a">Not to start. The hard part isn't the AI. It's <b>tidy CRM habits and recorded
+        calls</b>. The engineering is a one-time job, and the people asking never touch it.</p></div>
+      <div class="card qa"><span class="cat"><span class="msr" aria-hidden="true">psychology</span>Accuracy</span>
+        <p class="q">How do you stop it inventing numbers?</p>
+        <p class="a">It <b>never writes free-form queries</b>, so an invented column errors instead of
+        returning something plausible. And every answer shows its working, so you can check it.</p></div>
+      <div class="card qa"><span class="cat"><span class="msr" aria-hidden="true">payments</span>Cost</span>
+        <p class="q">What does it cost to run?</p>
+        <p class="a">Running it is modest. <b>The real cost is the one-off indexing</b> of calls and
+        emails so they can be searched by meaning. After that it grows only as new data arrives.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SLIDE 18 · THANK YOU ============
+     notes: Leave this up during Q&A so people can scan while they ask. -->
+<section class="slide" id="slide-16">
+  <div class="slide-content">
+    <p class="kicker reveal">Thank you</p>
+    <h2 class="slide-title reveal">Come and <span class="grad">say hello</span></h2>
+    <p class="lead reveal dim">Happy to talk about any of this: the questions worth asking, the mistakes, or
+    what you are building. Scan either code, or just find me after.</p>
+    <div class="thanks-grid reveal">
+      <div class="contact">
+        <span class="msr" aria-hidden="true">person</span>
+        <span class="who">LinkedIn</span>
+        <div class="qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 37 37" class="segno"><path class="qrline" stroke="currentColor" d="M2 2.5h7m2 0h1m1 0h4m2 0h4m2 0h1m2 0h7m-33 1h1m5 0h1m1 0h1m2 0h1m2 0h1m3 0h1m1 0h1m2 0h1m2 0h1m5 0h1m-33 1h1m1 0h3m1 0h1m1 0h2m4 0h2m1 0h1m2 0h1m1 0h1m1 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m3 0h4m5 0h1m2 0h3m1 0h1m1 0h3m1 0h1m-33 1h1m1 0h3m1 0h1m7 0h2m1 0h1m2 0h2m2 0h1m1 0h1m1 0h3m1 0h1m-33 1h1m5 0h1m3 0h1m1 0h1m2 0h3m1 0h1m2 0h1m1 0h1m1 0h1m5 0h1m-33 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-22 1h1m3 0h4m1 0h1m1 0h1m-22 1h3m1 0h2m4 0h5m1 0h3m1 0h1m8 0h2m-32 1h1m1 0h3m2 0h5m1 0h1m1 0h1m2 0h2m3 0h1m2 0h2m1 0h2m1 0h1m-32 1h1m2 0h1m1 0h1m1 0h2m1 0h1m1 0h2m1 0h2m2 0h4m3 0h3m1 0h2m-30 1h1m5 0h1m3 0h1m4 0h1m1 0h1m1 0h3m2 0h1m1 0h1m2 0h1m-32 1h1m1 0h1m2 0h1m2 0h1m1 0h2m2 0h2m1 0h2m2 0h2m1 0h1m2 0h2m1 0h2m-31 1h2m1 0h1m3 0h1m1 0h2m2 0h1m2 0h1m1 0h2m2 0h1m2 0h1m1 0h3m-32 1h1m2 0h1m1 0h2m1 0h5m1 0h2m1 0h1m1 0h3m2 0h1m1 0h4m-28 1h1m1 0h1m2 0h2m1 0h1m1 0h2m2 0h6m2 0h4m1 0h2m-30 1h4m1 0h3m2 0h1m2 0h1m1 0h7m2 0h2m1 0h3m-31 1h4m1 0h1m5 0h2m2 0h2m1 0h1m1 0h1m1 0h2m2 0h1m1 0h2m1 0h2m-27 1h2m1 0h4m1 0h1m1 0h2m2 0h2m5 0h2m1 0h1m-31 1h2m3 0h1m1 0h1m2 0h1m4 0h1m2 0h1m1 0h1m1 0h1m1 0h3m1 0h1m2 0h2m-30 1h1m1 0h8m2 0h3m3 0h1m7 0h2m1 0h1m-33 1h1m1 0h1m1 0h1m6 0h1m2 0h1m3 0h2m3 0h1m2 0h1m2 0h1m2 0h1m-31 1h2m2 0h3m1 0h1m1 0h4m2 0h1m1 0h2m1 0h1m1 0h3m1 0h4m-32 1h1m5 0h1m1 0h1m3 0h1m1 0h1m7 0h1m2 0h2m4 0h1m-33 1h1m5 0h3m1 0h2m2 0h2m1 0h1m4 0h1m1 0h5m3 0h1m-25 1h1m1 0h5m1 0h1m1 0h2m1 0h1m2 0h1m3 0h2m-30 1h7m4 0h1m1 0h1m1 0h1m2 0h2m1 0h1m1 0h2m1 0h1m1 0h1m-29 1h1m5 0h1m1 0h1m6 0h1m1 0h1m2 0h2m1 0h2m3 0h5m-33 1h1m1 0h3m1 0h1m2 0h3m4 0h1m1 0h1m2 0h1m1 0h6m1 0h2m-32 1h1m1 0h3m1 0h1m1 0h2m1 0h3m2 0h3m1 0h1m1 0h3m2 0h1m1 0h4m-33 1h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h1m2 0h1m3 0h8m1 0h1m-30 1h1m5 0h1m1 0h1m2 0h1m1 0h1m2 0h2m4 0h1m1 0h1m2 0h2m3 0h1m-33 1h7m2 0h1m2 0h2m1 0h1m1 0h2m2 0h1m1 0h1m2 0h1m1 0h1m1 0h1"/></svg></div>
+        <span class="where">linkedin.com/in/mayakrishnan-r</span>
+      </div>
+      <div class="contact">
+        <span class="msr" aria-hidden="true">language</span>
+        <span class="who">Website</span>
+        <div class="qr"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 29 29" class="segno"><path class="qrline" stroke="currentColor" d="M2 2.5h7m1 0h1m2 0h1m2 0h1m1 0h1m1 0h7m-25 1h1m5 0h1m1 0h1m3 0h1m3 0h1m1 0h1m5 0h1m-25 1h1m1 0h3m1 0h1m1 0h3m2 0h1m1 0h2m1 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m3 0h1m2 0h1m2 0h1m1 0h1m1 0h3m1 0h1m-25 1h1m1 0h3m1 0h1m1 0h4m1 0h2m1 0h1m1 0h1m1 0h3m1 0h1m-25 1h1m5 0h1m2 0h2m1 0h1m5 0h1m5 0h1m-25 1h7m1 0h1m1 0h1m1 0h1m1 0h1m1 0h1m1 0h7m-16 1h1m1 0h3m-14 1h1m2 0h7m1 0h2m1 0h1m2 0h1m2 0h1m1 0h3m-25 1h1m3 0h2m3 0h7m1 0h1m1 0h5m-24 1h5m1 0h5m1 0h2m1 0h2m1 0h4m2 0h1m-22 1h3m1 0h2m1 0h1m5 0h3m1 0h5m-25 1h2m1 0h1m1 0h2m3 0h1m3 0h3m1 0h2m4 0h1m-25 1h1m2 0h2m2 0h2m3 0h1m1 0h4m2 0h1m2 0h1m-24 1h3m1 0h4m6 0h2m2 0h1m1 0h5m-25 1h1m2 0h1m4 0h2m2 0h1m4 0h1m1 0h1m1 0h2m1 0h1m-25 1h1m2 0h1m1 0h5m1 0h2m1 0h1m1 0h5m1 0h2m-16 1h1m1 0h2m4 0h1m3 0h1m1 0h2m-24 1h7m1 0h1m1 0h1m1 0h3m1 0h1m1 0h1m1 0h1m3 0h1m-25 1h1m5 0h1m1 0h4m1 0h4m3 0h1m2 0h2m-25 1h1m1 0h3m1 0h1m1 0h1m1 0h2m1 0h1m1 0h6m2 0h2m-25 1h1m1 0h3m1 0h1m1 0h2m2 0h7m4 0h2m-25 1h1m1 0h3m1 0h1m2 0h3m1 0h1m3 0h1m2 0h5m-25 1h1m5 0h1m2 0h1m1 0h3m5 0h2m1 0h3m-25 1h7m1 0h1m2 0h3m2 0h1m1 0h1m2 0h1m2 0h1"/></svg></div>
+        <span class="where">itsmemaya.in</span>
+      </div>
+    </div>
+    <p class="slide-caption reveal">Questions · GTM · Marketing · Founders</p>
+  </div>
+</section>
+<!-- ============ NAVIGATION DOTS ============ -->
+<!-- GSAP enhancement (CDN). If offline, CSS reveals still run. -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+
+<script>
+/* ============================================
+   SLIDE CONTROLLER — plugin html-template pattern
+   Keyboard + touch nav, IO-driven
+   reveals, counters, and optional GSAP polish.
+   ============================================ */
+(function () {
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let currentSlide = 0;
+
+
+  function goToSlide(index) {
+    if (index < 0 || index >= slides.length) return;
+    currentSlide = index;
+    slides[index].scrollIntoView({ behavior: reduced ? 'auto' : 'smooth' });
+  }
+
+  /* --- keyboard --- */
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ' || e.key === 'PageDown') {
+      e.preventDefault(); goToSlide(currentSlide + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault(); goToSlide(currentSlide - 1);
+    } else if (e.key === 'Home') { e.preventDefault(); goToSlide(0); }
+    else if (e.key === 'End') { e.preventDefault(); goToSlide(slides.length - 1); }
+  });
+
+  /* --- touch swipe --- */
+  let touchStartY = 0;
+  document.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: true });
+  document.addEventListener('touchend', (e) => {
+    const diff = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diff) > 50) goToSlide(currentSlide + (diff > 0 ? 1 : -1));
+  }, { passive: true });
+
+  /* --- counters (run once per element) --- */
+  function runCounters(slide) {
+    slide.querySelectorAll('[data-count]').forEach((el) => {
+      if (el.dataset.done) return;
+      el.dataset.done = '1';
+      const target = parseFloat(el.dataset.count);
+      const decimals = parseInt(el.dataset.decimals || '0', 10);
+      const suffix = el.dataset.suffix || '';
+      if (reduced) {
+        el.textContent = target.toLocaleString(undefined, { minimumFractionDigits: decimals, maximumFractionDigits: decimals }) + suffix;
+        return;
+      }
+      const startTime = performance.now();
+      const duration = 1400;
+      function update(now) {
+        const p = Math.min((now - startTime) / duration, 1);
+        const eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = (eased * target).toLocaleString(undefined, {
+          minimumFractionDigits: decimals, maximumFractionDigits: decimals
+        }) + suffix;
+        if (p < 1) requestAnimationFrame(update);
+      }
+      requestAnimationFrame(update);
+    });
+  }
+
+  /* --- bar chart fills (widths applied on slide entry) --- */
+  function runBars(slide) {
+    slide.querySelectorAll('.fill[data-w]').forEach((f) => {
+      if (!f.style.width || f.style.width === '0px') {
+        if (reduced || !window.gsap) { f.style.width = f.dataset.w; }
+        else {
+          f.style.width = '0%';
+          gsap.to(f, { width: f.dataset.w, duration: 0.9, ease: 'power3.out', delay: 0.25 });
+        }
+      }
+    });
+  }
+
+  /* --- reveals --- */
+  function triggerAnimations(slide) {
+    slide.querySelectorAll('.reveal, .reveal-scale').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), reduced ? 0 : i * 90);
+    });
+    runCounters(slide);
+    runBars(slide);
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        currentSlide = slides.indexOf(entry.target);
+        triggerAnimations(entry.target);
+      }
+    });
+  }, { threshold: 0.5 });
+  slides.forEach((s) => observer.observe(s));
+
+  triggerAnimations(slides[0]);
+
+  /* --- material symbols: reveal icons only once the font is live.
+         Offline → the class is never added and labels render as clean text. --- */
+  if (document.fonts && document.fonts.load) {
+    document.fonts.load('1em "Material Symbols Rounded"', 'database').then(() => {
+      if (document.fonts.check('1em "Material Symbols Rounded"')) {
+        document.body.classList.add('icons-ready');
+      }
+    }).catch(() => { /* font unavailable — keep icons hidden */ });
+  }
+
+  /* --- GSAP polish: drifting gradient orbs (skipped if offline/reduced) --- */
+  if (window.gsap && !reduced) {
+    gsap.to('.orb.o1', { x: 60, y: 40, duration: 18, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+    gsap.to('.orb.o2', { x: -50, y: -35, duration: 22, yoyo: true, repeat: -1, ease: 'sine.inOut' });
+  }
+})();
+</script>
+</body>
+</html>
